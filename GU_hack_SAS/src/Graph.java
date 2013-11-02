@@ -43,15 +43,15 @@ public class Graph {
 	
 	private boolean hasFriendOfRelationship(long id) {
 		Node node = fileMap.get(id);
-		System.out.println("for node: " + id + " has friend list size = " + node.getFriendOfList().getListSize());
-		for (AdjListNode friend : node.getFriendOfList().getList()) {
-			System.out.println("check: " + friend.getId());
-			Node friendNode = fileMap.get(friend.getId());
+		//System.out.println("for node: " + id + " has friend list size = " + node.getFriendOfList().getListSize());
+		for (long friend : node.getFriendOfList().getList()) {
+			//System.out.println("check: " + friend);
+			Node friendNode = fileMap.get(friend);
 			if (friendNode != null) {
-				System.out.println("friend is not null " + friendNode.getId());
+				//System.out.println("friend is not null " + friendNode.getId());
 			}
 			if (friendNode != null && friendNode.isFriendOf(id)) {
-				
+				//System.out.println("true");
 				return true;
 			}
 		}
@@ -86,9 +86,9 @@ public class Graph {
 	    while (it.hasNext()) {
 	        Map.Entry pairs = (Map.Entry)it.next();
 	        Node curNode = (Node)pairs.getValue();
-	        for(AdjListNode n : curNode.getDislikes().getList())
+	        for(long n : curNode.getDislikes().getList())
 	        {
-	        	map.get(n.getId()).dislikedByNumOfPeople++;
+	        	map.get(n).dislikedByNumOfPeople++;
 	        }
 	    }
 	}

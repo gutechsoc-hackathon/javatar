@@ -23,16 +23,16 @@ public class Runner {
 					String[] splittedLine = line.split(" ");
 					if(splittedLine.length == 1){
 						if (splittedLine[0].contains("{") || splittedLine[0].contains("}")){
-							System.out.println("SKOBA: " + splittedLine[0]);
+							//System.out.println("SKOBA: " + splittedLine[0]);
 						}else{
-							System.out.println("ID :" + splittedLine[0]);
+							//System.out.println("ID :" + splittedLine[0]);
 							mainId = splittedLine[0];
 							Runner.handleIdEntry(mainId);
 						}  
 					}else{
 						
 						if(splittedLine.length == 2 ){
-							System.out.println(splittedLine[0] + " " + splittedLine[1]);
+							//System.out.println(splittedLine[0] + " " + splittedLine[1]);
 							Runner.isInRelationshipWithHimself(mainId, splittedLine[1]);
 							//TODO: handle relationships
 							try {
