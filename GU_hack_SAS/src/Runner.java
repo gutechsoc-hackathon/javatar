@@ -1,9 +1,12 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
 public class Runner {
@@ -11,6 +14,19 @@ public class Runner {
 	public static int hasReleationshipWithHimself = 0;
 	public static int duplicate = 0;
 	public static void main(String[] args){
+		
+		//TODO working just needs to be out of the comment
+		/*
+		File file = null;
+		JFileChooser openFileDialog = new JFileChooser();
+		int filePath = openFileDialog.showDialog(null, "Open");
+		if (filePath==JFileChooser.APPROVE_OPTION){
+			file = openFileDialog.getSelectedFile();
+		}
+		*/
+		
+		
+		
 		try {
 			BufferedReader in = new BufferedReader(new FileReader("relationships-small.txt"));
 			String line = null;
