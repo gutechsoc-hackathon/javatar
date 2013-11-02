@@ -9,17 +9,17 @@ public class GUI{
 	private javax.swing.JButton jButton3;
 	private javax.swing.JButton jButton4;
 	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel10;
-	private javax.swing.JLabel jLabel11;
-	private javax.swing.JLabel jLabel12;
+	private javax.swing.JLabel relThemselves;
+	private javax.swing.JLabel friendOfRel;
+	private javax.swing.JLabel mostDisliked;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;
 	private javax.swing.JLabel jLabel4;
 	private javax.swing.JLabel jLabel5;
 	private javax.swing.JLabel jLabel6;
-	private javax.swing.JLabel jLabel7;
-	private javax.swing.JLabel jLabel8;
-	private javax.swing.JLabel jLabel9;
+	private javax.swing.JLabel numOfPeople;
+	private javax.swing.JLabel evenAve;
+	private javax.swing.JLabel oddAve;
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JPanel jPanel2;
 	private javax.swing.JPanel jPanel3;
@@ -41,12 +41,12 @@ public class GUI{
 		jLabel4 = new javax.swing.JLabel();
 		jLabel5 = new javax.swing.JLabel();
 		jLabel6 = new javax.swing.JLabel();
-		jLabel7 = new javax.swing.JLabel();
-		jLabel8 = new javax.swing.JLabel();
-		jLabel9 = new javax.swing.JLabel();
-		jLabel10 = new javax.swing.JLabel();
-		jLabel11 = new javax.swing.JLabel();
-		jLabel12 = new javax.swing.JLabel();
+		numOfPeople = new javax.swing.JLabel();
+		evenAve = new javax.swing.JLabel();
+		oddAve = new javax.swing.JLabel();
+		relThemselves = new javax.swing.JLabel();
+		friendOfRel = new javax.swing.JLabel();
+		mostDisliked = new javax.swing.JLabel();
 		jPanel2 = new javax.swing.JPanel();
 		jButton1 = new javax.swing.JButton();
 		jButton2 = new javax.swing.JButton();
@@ -68,17 +68,17 @@ public class GUI{
 
 		jLabel6.setText("Most disliked person:");
 
-		jLabel7.setText("jLabel7");
+		numOfPeople.setText("jLabel7");
 
-		jLabel8.setText("jLabel8");
+		evenAve.setText("evenAve");
 
-		jLabel9.setText("jLabel9");
+		oddAve.setText("oddAve");
 
-		jLabel10.setText("jLabel10");
+		relThemselves.setText("relThemselves");
 
-		jLabel11.setText("jLabel11");
+		friendOfRel.setText("friendOfRel");
 
-		jLabel12.setText("1234567890123456789");
+		mostDisliked.setText("1234567890123456789");
 
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(
 				jPanel1);
@@ -106,12 +106,12 @@ public class GUI{
 												jPanel1Layout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(jLabel7)
-														.addComponent(jLabel8)
-														.addComponent(jLabel9)
-														.addComponent(jLabel10)
-														.addComponent(jLabel11)
-														.addComponent(jLabel12))
+														.addComponent(numOfPeople)
+														.addComponent(evenAve)
+														.addComponent(oddAve)
+														.addComponent(relThemselves)
+														.addComponent(friendOfRel)
+														.addComponent(mostDisliked))
 										.addContainerGap(
 												javax.swing.GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)));
@@ -128,45 +128,45 @@ public class GUI{
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
 														.addComponent(jLabel1)
-														.addComponent(jLabel7))
+														.addComponent(numOfPeople))
 										.addGap(18, 18, 18)
 										.addGroup(
 												jPanel1Layout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
 														.addComponent(jLabel2)
-														.addComponent(jLabel8))
+														.addComponent(evenAve))
 										.addGap(18, 18, 18)
 										.addGroup(
 												jPanel1Layout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
 														.addComponent(jLabel3)
-														.addComponent(jLabel9))
+														.addComponent(oddAve))
 										.addGap(18, 18, 18)
 										.addGroup(
 												jPanel1Layout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
 														.addComponent(jLabel4)
-														.addComponent(jLabel10))
+														.addComponent(relThemselves))
 										.addGap(18, 18, 18)
 										.addGroup(
 												jPanel1Layout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
 														.addComponent(jLabel5)
-														.addComponent(jLabel11))
+														.addComponent(friendOfRel))
 										.addGap(18, 18, 18)
 										.addGroup(
 												jPanel1Layout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
 														.addComponent(jLabel6)
-														.addComponent(jLabel12))
+														.addComponent(mostDisliked))
 										.addContainerGap(39, Short.MAX_VALUE)));
 
-		jLabel7.getAccessibleContext().setAccessibleName("numberOfPeople");
+		numOfPeople.getAccessibleContext().setAccessibleName("numberOfPeople");
 
 		jTabbedPane9.addTab("Statistics", jPanel1);
 
@@ -311,6 +311,30 @@ public class GUI{
 				frame.setVisible(true);
 			}
 		});
+	}
+
+	public javax.swing.JLabel getRelThemselves() {
+		return relThemselves;
+	}
+
+	public javax.swing.JLabel getFriendOfRel() {
+		return friendOfRel;
+	}
+
+	public javax.swing.JLabel getMostDisliked() {
+		return mostDisliked;
+	}
+
+	public javax.swing.JLabel getNumOfPeople() {
+		return numOfPeople;
+	}
+
+	public javax.swing.JLabel getEvenAve() {
+		return evenAve;
+	}
+
+	public javax.swing.JLabel getOddAve() {
+		return oddAve;
 	}
 
 }

@@ -26,8 +26,10 @@ public class Graph {
 				odd_sum += fileMap.get(id).numberOfRelationships();
 			}
 		}
-		System.out.println("Average num of relationships for odd: " + (1.0*odd_sum) / odd_count);
-		System.out.println("Average num of relationships for even: " + (1.0*even_sum) / even_count);
+		Runner.ui.getEvenAve().setText(String.valueOf((1.0*even_sum) / even_count));
+		Runner.ui.getOddAve().setText(String.valueOf((1.0*odd_sum) / odd_count));
+		//System.out.println("Average num of relationships for odd: " + (1.0*odd_sum) / odd_count);
+		//System.out.println("Average num of relationships for even: " + (1.0*even_sum) / even_count);
 	}
 	
 	public long countPeopleWithFriendOfRelationships() {
