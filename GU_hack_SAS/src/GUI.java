@@ -281,6 +281,7 @@ public class GUI{
 	 *            the command line arguments
 	 */
 	public void show() {
+		this.setTitle("SAS Challenge");
 		
 		try {
 			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
