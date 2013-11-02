@@ -19,8 +19,7 @@ You should have received a copy of the GNU Affero General Public License
 along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package org.gephi.toolkit.demos;
-
+package GephiGraph;
 import org.gephi.graph.api.*;
 import org.gephi.project.api.ProjectController;
 import org.gephi.project.api.Workspace;
