@@ -1,4 +1,6 @@
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 
 public class Graph {
@@ -48,6 +50,41 @@ public class Graph {
 			}
 		}
 		return false;
+	}
+	
+	//Which person is disliked the most
+	public long theMostDislikedPerson()
+	{
+		iterateDislikes(this.fileMap);
+		Iterator it = this.fileMap.entrySet().iterator();
+		Node mostDisliked;
+		if (it.hasNext())
+		{
+			Map.Entry pairs = (Map.Entry)it.next();
+			mostDisliked = (Node)pairs.getValue();
+		}
+		else
+			return 0;			
+	    while (it.hasNext()) {
+	        Map.Entry pairs = (Map.Entry)it.next();
+	        Node curNode = (Node)pairs.getValue();
+	        if (curNode.getDislikedByNumOfPeople() > mostDisliked.getDislikedByNumOfPeople())
+	        	mostDisliked = curNode;
+	    }		
+		return mostDisliked.getDislikedByNumOfPeople();
+	}
+	
+	//increments the dislikedByNumOfPeople counter for each Node
+	public static void iterateDislikes(HashMap<Long, Node> map) {
+	    Iterator it = map.entrySet().iterator();
+	    while (it.hasNext()) {
+	        Map.Entry pairs = (Map.Entry)it.next();
+	        Node curNode = (Node)pairs.getValue();
+	        for(AdjListNode n : curNode.getDislikes().getList())
+	        {
+	        	map.get(n.getId()).dislikedByNumOfPeople++;
+	        }
+	    }
 	}
 	
 }

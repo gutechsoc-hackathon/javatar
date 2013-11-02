@@ -60,4 +60,56 @@ public class Node {
 	public boolean isFriendOf(long id) {
 		return this.friendOf.has(id);
 	}
+
+	public AdjList getDislikes() {
+		return dislikes;
+	}
+
+	public void setDislikes(AdjList dislikes) {
+		this.dislikes = dislikes;
+	}
+
+	public AdjList getFriendOf() {
+		return friendOf;
+	}
+
+	public void setFriendOf(AdjList friendOf) {
+		this.friendOf = friendOf;
+	}
+
+	public AdjList getKnows() {
+		return knows;
+	}
+
+	public void setKnows(AdjList knows) {
+		this.knows = knows;
+	}
+
+	public AdjList getMarriedTo() {
+		return marriedTo;
+	}
+
+	public void setMarriedTo(AdjList marriedTo) {
+		this.marriedTo = marriedTo;
+	}
+
+	public AdjList getHasDated() {
+		return hasDated;
+	}
+
+	public void setHasDated(AdjList hasDated) {
+		this.hasDated = hasDated;
+	}
+
+	public long getDislikedByNumOfPeople() {
+		return dislikedByNumOfPeople;
+	}
+
+	public void setDislikedByNumOfPeople(long dislikedByNumOfPeople) {
+		this.dislikedByNumOfPeople = dislikedByNumOfPeople;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 }
