@@ -1,7 +1,8 @@
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Runner {
 	public static final Graph graph = new Graph();
@@ -10,8 +11,8 @@ public class Runner {
 	public static GUI ui;
 
 	public static void main(String[] args) throws IOException {
-		 BufferedReader in = null;
-		//FileInputStream fis = null;
+		// BufferedReader in = null;
+		FileInputStream fis = null;
 
 		// TODO working just needs to be out of the comment
 		/*
@@ -26,13 +27,14 @@ public class Runner {
 		//ui.show();
 		
 		try {
-			//fis = new FileInputStream("relationships-100m.txt");
-			//Scanner in = new Scanner(fis);
-			 in = new BufferedReader(new FileReader("relationships-100m.txt"));
+			fis = new FileInputStream("relationships-100m.txt");
+			Scanner in = new Scanner(fis);
+			// in = new BufferedReader(new
+			// FileReader("relationships-small.txt"));
 			String line = null;
 			String mainId = null;
-			while ((line = in.readLine()) != null) {
-				//line = in.nextLine();
+			while (in.hasNext()) {
+				line = in.nextLine();
 				line = line.trim();
 				if (!line.isEmpty()) {
 					String[] splittedLine = line.split(" ");
