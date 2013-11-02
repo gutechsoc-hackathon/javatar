@@ -56,7 +56,7 @@ public class Runner {
 		} 
 	}
 	public static void isInRelationshipWithHimself(String a, String b){
-		if(a == b){
+		if(a.equals(b)){
 			hasReleationshipWithHimself++;
 		}
 	}
