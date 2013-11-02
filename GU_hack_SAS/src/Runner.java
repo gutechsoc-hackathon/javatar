@@ -29,7 +29,7 @@ public class Runner {
 		*/
 		
 		//GUI ui = new GUI();
-		//ui.show();
+		//ui.setVisible(true);
 		
 		try {
 			fis = new FileInputStream("relationships.txt");
