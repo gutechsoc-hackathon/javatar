@@ -73,5 +73,13 @@ public class Graph {
 	public void addKnows(long node, long knows) {
 		fileMap.get(node).addKnows(knows);
 	}
+
+	public HashMap<Long, Node> getFileMap() {
+		return fileMap;
+	}
+
+	public void setFileMap(HashMap<Long, Node> fileMap) {
+		this.fileMap = fileMap;
+	}
 	
 }
