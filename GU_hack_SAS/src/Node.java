@@ -5,6 +5,7 @@ public class Node {
 	public AdjList knows;
 	public AdjList marriedTo;
 	public AdjList hasDated;
+	public long dislikedByNumOfPeople;
 	
 	public Node() {
 		this.dislikes = new AdjList();
