@@ -12,8 +12,8 @@ import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
 public class Runner {
 	public static final Graph graph = new Graph();
-	public static int hasReleationshipWithHimself = 0;
-	public static int duplicate = 0;
+	public static long hasReleationshipWithHimself = 0;
+	public static long duplicate = 0;
 
 	public static void main(String[] args) throws IOException {
 		// BufferedReader in = null;
@@ -82,9 +82,11 @@ public class Runner {
 			System.out.println("ne6to se barka s 4eteneto na liniq");
 			e.printStackTrace();
 		}
-
+		System.out.println("Number of people: " + graph.getSize());
 		graph.averageRelationships();
-		System.out.println(graph.countPeopleWithFriendOfRelationships());
+		System.out.println("Relationship with themselves: " + hasReleationshipWithHimself);
+		System.out.println("# of people having double relationships : " + graph.countPeopleWithFriendOfRelationships());
+		System.out.println("Most disliked person: " + graph.theMostDislikedPerson());
 	}
 
 	public static void isInRelationshipWithHimself(String a, String b) {
