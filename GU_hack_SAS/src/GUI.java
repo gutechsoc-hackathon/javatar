@@ -1,10 +1,13 @@
-public class GUI extends javax.swing.JFrame {
+import javax.swing.JFrame;
+
+public class GUI{
 
 	/**
 	 * because it complained...
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private JFrame frame;
 	// Variables declaration - do not modify
 	private javax.swing.JButton jButton1;
 	private javax.swing.JButton jButton2;
@@ -56,7 +59,7 @@ public class GUI extends javax.swing.JFrame {
 		jButton4 = new javax.swing.JButton();
 		jPanel3 = new javax.swing.JPanel();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 		jLabel1.setText("Number of people:");
 
@@ -251,9 +254,10 @@ public class GUI extends javax.swing.JFrame {
 
 		jTabbedPane9.addTab("Longest cycle", jPanel3);
 
+		frame = new JFrame();
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
-				getContentPane());
-		getContentPane().setLayout(layout);
+				frame.getContentPane());
+		frame.getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(
 				javax.swing.GroupLayout.Alignment.LEADING).addComponent(
 				jTabbedPane9));
@@ -261,7 +265,7 @@ public class GUI extends javax.swing.JFrame {
 				javax.swing.GroupLayout.Alignment.LEADING).addComponent(
 				jTabbedPane9));
 
-		pack();
+		frame.pack();
 	}
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,7 +311,8 @@ public class GUI extends javax.swing.JFrame {
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new GUI().setVisible(true);
+				frame.pack();
+				frame.setVisible(true);
 			}
 		});
 	}
