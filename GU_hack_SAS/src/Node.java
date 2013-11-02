@@ -128,4 +128,12 @@ public class Node {
 	public void addDated(long id) {
 		this.hasDated.add(id);
 	}
+	
+	public String toString(){
+		return "Dislikes: " + this.dislikes + 
+				"Friends Of : " + this.friendOf +
+				"Knows: " + this.knows + 
+				"Has dated: " + this.hasDated +
+				"Married to: " + this.marriedTo;
+	}
 }
