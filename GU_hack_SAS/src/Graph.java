@@ -3,7 +3,7 @@ import java.util.HashMap;
 
 public class Graph {
 
-	public HashMap<Long, Node> fileMap;
+	private HashMap<Long, Node> fileMap;
 	
 	public Graph(){
 		 fileMap = new HashMap<Long,Node>();
@@ -48,6 +48,30 @@ public class Graph {
 			}
 		}
 		return false;
+	}
+	
+	public void addNode(long id) {
+		this.fileMap.put(id, new Node(id));
+	}
+	
+	public void addFriend(long node, long friend) {
+		fileMap.get(node).addFriend(friend);
+	}
+	
+	public void addDislike(long node, long dislikes) {
+		fileMap.get(node).addDislikes(dislikes);
+	}
+	
+	public void addMarried(long node, long married) {
+		fileMap.get(node).addMarried(married);
+	}
+	
+	public void addDated(long node, long dated) {
+		fileMap.get(node).addDated(dated);
+	}
+	
+	public void addKnows(long node, long knows) {
+		fileMap.get(node).addKnows(knows);
 	}
 	
 }
