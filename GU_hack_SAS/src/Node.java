@@ -33,12 +33,17 @@ public class Node {
 	public long NumberOfDated() {
 		return this.hasDated.getListSize();
 	}
-	
+
 	public long numberOfRelationships() {
 		return dislikes.getListSize() + 
 				friendOf.getListSize() + 
 				knows.getListSize() + 
 				marriedTo.getListSize() + 
 				hasDated.getListSize();
+	}
+	public boolean HasRelationshipWith(long id)
+	{
+		return this.dislikes.has(id) || this.friendOf.has(id) || this.marriedTo.has(id)
+				|| this.hasDated.has(id) || this.knows.has(id);
 	}
 }
