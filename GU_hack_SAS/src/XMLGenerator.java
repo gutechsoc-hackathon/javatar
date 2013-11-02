@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 public class XMLGenerator {
@@ -88,7 +89,7 @@ public class XMLGenerator {
 		System.out.println("Entered Process Nodes with keys size="+ keys.size() + "\n");
 		for (long id: keys)
 		{
-			System.out.println("Current id is: " + id + "\n");
+			//System.out.println("Current id is: " + id + "\n");
 			currentNode += nodeOpen;
 			currentNode += "id=\"" + id + "\" ";
 			currentNode += "label=\"" + id + "\">\n";
@@ -109,11 +110,12 @@ public class XMLGenerator {
 	
 	public void writeFile(String yourXML){
 	    try {
-	        BufferedWriter out = new BufferedWriter(new FileWriter("src/resources/graph.gexf"));
+	        BufferedWriter out = new BufferedWriter(new FileWriter("src/resources/graph2.gexf"));
 	        out.write(yourXML);
 	        out.close();
+
 	    } catch (IOException e) {
 	        e.printStackTrace();
-	    }
+	    } 
 	}	
 }

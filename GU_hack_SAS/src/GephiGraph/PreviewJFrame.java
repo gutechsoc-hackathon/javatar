@@ -50,7 +50,7 @@ public class PreviewJFrame {
         ImportController importController = Lookup.getDefault().lookup(ImportController.class);
         Container container;
         try {
-            File file = new File(getClass().getResource("graph.gexf").toURI());
+            File file = new File(getClass().getResource("/resources/graph2.gexf").toURI());
             container = importController.importFile(file);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -63,11 +63,13 @@ public class PreviewJFrame {
         //Preview configuration
         PreviewController previewController = Lookup.getDefault().lookup(PreviewController.class);
         PreviewModel previewModel = previewController.getModel();
-        previewModel.getProperties().putValue(PreviewProperty.SHOW_NODE_LABELS, Boolean.TRUE);
+        previewModel.getProperties().putValue(PreviewProperty.SHOW_NODE_LABELS, Boolean.FALSE);
+        previewModel.getProperties().putValue(PreviewProperty.NODE_LABEL_PROPORTIONAL_SIZE, Boolean.FALSE);
+        previewModel.getProperties().putValue(PreviewProperty.NODE_BORDER_WIDTH, 10);
         previewModel.getProperties().putValue(PreviewProperty.NODE_LABEL_COLOR, new DependantOriginalColor(Color.WHITE));
-        previewModel.getProperties().putValue(PreviewProperty.EDGE_CURVED, Boolean.FALSE);
-        previewModel.getProperties().putValue(PreviewProperty.EDGE_OPACITY, 50);
-        previewModel.getProperties().putValue(PreviewProperty.EDGE_RADIUS, 10f);
+        previewModel.getProperties().putValue(PreviewProperty.EDGE_CURVED, Boolean.TRUE);
+        previewModel.getProperties().putValue(PreviewProperty.EDGE_OPACITY, 70);
+        previewModel.getProperties().putValue(PreviewProperty.EDGE_RADIUS, 2f);
         previewModel.getProperties().putValue(PreviewProperty.BACKGROUND_COLOR, Color.BLACK);
         previewController.refreshPreview();
 
@@ -86,6 +88,7 @@ public class PreviewJFrame {
         frame.setLayout(new BorderLayout());
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         frame.add(applet, BorderLayout.CENTER);
         
         frame.pack();

@@ -39,14 +39,14 @@ public class VisualiseGraph {
 		//ui.show();
 		
 		try {
-			fis = new FileInputStream("relationships-small.txt");
+			fis = new FileInputStream("relationships-100m.txt");
 			Scanner in = new Scanner(fis);
 			// in = new BufferedReader(new
 			// FileReader("relationships-small.txt"));
 			String line = null;
 			String mainId = null;
 			while (in.hasNext()) {
-				System.out.println("Next line");
+				//System.out.println("Next line");
 				line = in.nextLine();
 				line = line.trim();
 				if (!line.isEmpty()) {
@@ -109,7 +109,7 @@ public class VisualiseGraph {
 			System.out.println("found duplicate");
 			// TODO: handle update of old entry
 		} else {
-			System.out.println("added to to HashMap");
+			//System.out.println("added to to HashMap");
 			graph.getFileMap().put(Long.parseLong(mainId),
 					new Node(Long.parseLong(mainId)));
 		}
