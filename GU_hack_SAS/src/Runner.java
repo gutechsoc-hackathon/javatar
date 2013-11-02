@@ -22,11 +22,11 @@ public class Runner {
 		// TODO working just needs to be out of the comment
 		/*
 		 * File file = null; JFileChooser openFileDialog = new JFileChooser();
-		 * int filePath = openFileDialog.showDialog(null, "Open"); if
-		 * (filePath==JFileChooser.APPROVE_OPTION){ file =
-		 * openFileDialog.getSelectedFile(); }
-		 */
-
+		 * int filePath = openFileDialog.showDialog(null, "Open");
+		if (filePath==JFileChooser.APPROVE_OPTION){
+			file = openFileDialog.getSelectedFile();
+		}
+		*/
 		try {
 			fis = new FileInputStream("relationships-small.txt");
 			Scanner in = new Scanner(fis);
