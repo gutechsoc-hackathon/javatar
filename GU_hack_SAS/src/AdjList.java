@@ -16,7 +16,12 @@ public class AdjList {
 		this.list.add(node);
 	}
 	
+
 	public boolean has(long id) {
 		return list.contains(new AdjListNode(id));
+	}
+	public long getListSize()
+	{
+		return list.size();
 	}
 }
