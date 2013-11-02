@@ -28,11 +28,11 @@ public class Runner {
 		}
 		*/
 		
-		//GUI ui = new GUI();
-		//ui.setVisible(true);
+		GUI ui = new GUI();
+		ui.show();
 		
 		try {
-			fis = new FileInputStream("relationships.txt");
+			fis = new FileInputStream("relationships-small.txt");
 			Scanner in = new Scanner(fis);
 			// in = new BufferedReader(new
 			// FileReader("relationships-small.txt"));
