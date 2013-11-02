@@ -28,5 +28,26 @@ public class Graph {
 		System.out.println("Average num of relationships for even: " + (1.0*even_sum) / even_count);
 	}
 	
+	public long countPeopleWithFriendOfRelationships() {
+		long count = 0;
+		for (long id : fileMap.keySet()) {
+			if (hasFriendOfRelationship(id)) {
+				count++;
+			}
+		}
+		return count;
+		
+	}
+	
+	private boolean hasFriendOfRelationship(long id) {
+		Node node = fileMap.get(id);
+		for (AdjListNode friend : node.getFriendOfList().getList()) {
+			Node friendNode = fileMap.get(friend.getId());
+			if (friendNode.isFriendOf(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }

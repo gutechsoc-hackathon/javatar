@@ -14,8 +14,13 @@ public class Node {
 		this.marriedTo = new AdjList(id);
 		this.hasDated = new AdjList(id);
 	}
+	
 	public long getId() {
 		return this.id;
+	}
+	
+	public AdjList getFriendOfList() {
+		return this.friendOf;
 	}
 	public long NumberOfdislikes() {
 		return this.dislikes.getListSize();
@@ -44,9 +49,14 @@ public class Node {
 				marriedTo.getListSize() + 
 				hasDated.getListSize();
 	}
+	
 	public boolean HasRelationshipWith(long id)
 	{
 		return this.dislikes.has(id) || this.friendOf.has(id) || this.marriedTo.has(id)
 				|| this.hasDated.has(id) || this.knows.has(id);
+	}
+	
+	public boolean isFriendOf(long id) {
+		return this.friendOf.has(id);
 	}
 }

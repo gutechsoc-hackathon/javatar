@@ -1,4 +1,5 @@
 import java.util.HashSet;
+import java.util.Set;
 
 
 public class AdjList {
@@ -17,7 +18,10 @@ public class AdjList {
 	public void add(AdjListNode node) {
 		this.list.add(node);
 	}
-	
+
+	public Set<AdjListNode> getList() {
+		return list;
+	}
 
 	public boolean has(long id) {
 		return list.contains(new AdjListNode(id));
