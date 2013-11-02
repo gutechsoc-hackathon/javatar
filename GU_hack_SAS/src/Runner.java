@@ -32,7 +32,7 @@ public class Runner {
 		//ui.show();
 		
 		try {
-			fis = new FileInputStream("relationships-small.txt");
+			fis = new FileInputStream("relationships.txt");
 			Scanner in = new Scanner(fis);
 			// in = new BufferedReader(new
 			// FileReader("relationships-small.txt"));
