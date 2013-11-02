@@ -57,7 +57,6 @@ public class GUI {
 		jButton4 = new javax.swing.JButton();
 		jPanel3 = new javax.swing.JPanel();
 
-		// setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 		jLabel1.setText("Number of people:");
 
@@ -314,6 +313,7 @@ public class GUI {
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 				Toolkit toolkit = Toolkit.getDefaultToolkit();
 				Dimension screenSize = toolkit.getScreenSize();
 				int x = (screenSize.width - frame.getWidth()) / 2;
