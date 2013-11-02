@@ -43,9 +43,15 @@ public class Graph {
 	
 	private boolean hasFriendOfRelationship(long id) {
 		Node node = fileMap.get(id);
+		System.out.println("for node: " + id + " has friend list size = " + node.getFriendOfList().getListSize());
 		for (AdjListNode friend : node.getFriendOfList().getList()) {
+			System.out.println("check: " + friend.getId());
 			Node friendNode = fileMap.get(friend.getId());
-			if (friendNode.isFriendOf(id)) {
+			if (friendNode != null) {
+				System.out.println("friend is not null " + friendNode.getId());
+			}
+			if (friendNode != null && friendNode.isFriendOf(id)) {
+				
 				return true;
 			}
 		}
