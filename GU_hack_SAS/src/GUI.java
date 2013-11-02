@@ -2,11 +2,6 @@ import javax.swing.JFrame;
 
 public class GUI{
 
-	/**
-	 * because it complained...
-	 */
-	private static final long serialVersionUID = 1L;
-
 	private JFrame frame;
 	// Variables declaration - do not modify
 	private javax.swing.JButton jButton1;
@@ -281,7 +276,7 @@ public class GUI{
 	 *            the command line arguments
 	 */
 	public void show() {
-		this.setTitle("SAS Challenge");
+		frame.setTitle("SAS Challenge");
 		
 		try {
 			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
