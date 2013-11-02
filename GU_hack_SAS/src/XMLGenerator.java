@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class XMLGenerator {
 	
@@ -28,7 +29,7 @@ public class XMLGenerator {
 		xmlBody = xmlEdges = xmlNodes = "";
 	}
 	
-	public void processEdges(HashMap<Long, Node> fileMap)
+	public void processEdges(TreeMap<Long, Node> fileMap)
 	{	
 		System.out.println("Entered Process Edges\n");
 		xmlEdges += "<edges>\n";
@@ -100,7 +101,7 @@ public class XMLGenerator {
 		xmlNodes += "</nodes>\n";
 	}
 	
-	public String generateXML(HashMap<Long, Node> fileMap)
+	public String generateXML(TreeMap<Long, Node> fileMap)
 	{
 		processNodes(fileMap.keySet());
 		processEdges(fileMap);

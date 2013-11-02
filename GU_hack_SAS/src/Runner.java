@@ -12,6 +12,7 @@ public class Runner {
 
 	public static void main(String[] args) throws IOException {
 		// BufferedReader in = null;
+		long count = 0;
 		FileInputStream fis = null;
 
 		// TODO working just needs to be out of the comment
@@ -23,7 +24,7 @@ public class Runner {
 		}
 		*/
 		
-		ui = new GUI();
+		//ui = new GUI();
 		//ui.show();
 		
 		try {
@@ -44,6 +45,11 @@ public class Runner {
 							// System.out.println("SKOBA: " + splittedLine[0]);
 						} else {
 							// System.out.println("ID :" + splittedLine[0]);
+							count++;
+							if (count % 10000 == 0) {
+								System.out.println("Read " + count);
+							}
+								if (count > 1000000) break;
 							mainId = splittedLine[0];
 							Runner.handleIdEntry(mainId);
 						}
@@ -82,7 +88,7 @@ public class Runner {
 			System.out.println("ne6to se barka s 4eteneto na liniq");
 			e.printStackTrace();
 		}
-		
+		long start = System.currentTimeMillis();
 		//ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
 		System.out.println("Number of people: " + graph.getSize());
 		graph.averageRelationships();
@@ -93,6 +99,8 @@ public class Runner {
 		//ui.getMostDisliked().setText(String.valueOf(graph.theMostDislikedPerson()));
 		System.out.println("Most disliked person: " + graph.theMostDislikedPerson());
 		//graph.longestCycle(807618169778923806L);
+		long end = System.currentTimeMillis();
+		System.out.println("Runtime after reading: " + ((end - start)/1000.0));
 	}
 
 	public static void isInRelationshipWithHimself(String a, String b) {

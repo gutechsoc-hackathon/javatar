@@ -1,13 +1,14 @@
 import java.util.HashMap;
 import java.util.Stack;
+import java.util.TreeMap;
 
 
 public class Graph {
 
-	private HashMap<Long, Node> fileMap;
+	private TreeMap<Long, Node> fileMap;
 	
 	public Graph(){
-		 fileMap = new HashMap<Long,Node>(1<<10);
+		 fileMap = new TreeMap<Long,Node>();
 	}
 	
 	public long getSize(){
@@ -16,13 +17,13 @@ public class Graph {
 	
 	public void averageRelationships(){
 		long odd_count = 0, even_count = 0, odd_sum = 0, even_sum = 0;
-		for (long id : fileMap.keySet()) {
-			if (id % 2 == 0) {
+		for (Node node : fileMap.values()) {
+			if (node.getId() % 2 == 0) {
 				even_count++;
-				even_sum += fileMap.get(id).numberOfRelationships();
+				even_sum += node.numberOfRelationships();
 			} else {
 				odd_count++;
-				odd_sum += fileMap.get(id).numberOfRelationships();
+				odd_sum += node.numberOfRelationships();
 			}
 		}
 		//Runner.ui.getEvenAve().setText(String.valueOf((1.0*even_sum) / even_count));
@@ -33,8 +34,8 @@ public class Graph {
 	
 	public long countPeopleWithFriendOfRelationships() {
 		long count = 0;
-		for (long id : fileMap.keySet()) {
-			if (hasFriendOfRelationship(id)) {
+		for (Node node : fileMap.values()) {
+			if (hasFriendOfRelationship(node)) {
 				count++;
 			}
 		}
@@ -42,8 +43,8 @@ public class Graph {
 		
 	}
 	
-	private boolean hasFriendOfRelationship(long id) {
-		Node node = fileMap.get(id);
+	private boolean hasFriendOfRelationship(Node node) {
+		//Node node = fileMap.get(id);
 		//System.out.println("for node: " + id + " has friend list size = " + node.getFriendOfList().getListSize());
 		for (long friend : node.getFriendOfList().getList()) {
 			//System.out.println("check: " + friend);
@@ -51,7 +52,7 @@ public class Graph {
 			if (friendNode != null) {
 				//System.out.println("friend is not null " + friendNode.getId());
 			}
-			if (friendNode != null && friendNode.isFriendOf(id)) {
+			if (friendNode != null && friendNode.isFriendOf(node.getId())) {
 				//System.out.println("true");
 				return true;
 			}
@@ -76,7 +77,7 @@ public class Graph {
 	}
 	
 	//increments the dislikedByNumOfPeople counter for each Node
-	public static void iterateDislikes(HashMap<Long, Node> map, 
+	public static void iterateDislikes(TreeMap<Long, Node> map, 
 			HashMap<Long, Long> dislikes) {
 		
 		for (long key : map.keySet()) {
@@ -115,13 +116,13 @@ public class Graph {
 		fileMap.get(node).addKnows(knows);
 	}
 
-	public HashMap<Long, Node> getFileMap() {
+	public TreeMap<Long, Node> getFileMap() {
 		return fileMap;
 	}
-
-	public void setFileMap(HashMap<Long, Node> fileMap) {
+/*
+	public void setFileMap(TreeMap<Long, Node> fileMap) {
 		this.fileMap = fileMap;
-	}
+	}*/
 	
 	long maxLen, curLen, curIndex, finalIndex;
 	public void longestCycle(long id) {
