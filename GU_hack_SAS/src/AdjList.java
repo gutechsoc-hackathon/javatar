@@ -15,4 +15,9 @@ public class AdjList {
 	public void add(AdjListNode node) {
 		this.list.add(node);
 	}
+	
+	public long getListSize()
+	{
+		return list.size();
+	}
 }
