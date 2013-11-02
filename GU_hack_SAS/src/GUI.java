@@ -1,6 +1,9 @@
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 
-public class GUI{
+public class GUI {
 
 	private JFrame frame;
 	// Variables declaration - do not modify
@@ -54,7 +57,7 @@ public class GUI{
 		jButton4 = new javax.swing.JButton();
 		jPanel3 = new javax.swing.JPanel();
 
-		//setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		// setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 		jLabel1.setText("Number of people:");
 
@@ -106,12 +109,16 @@ public class GUI{
 												jPanel1Layout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(numOfPeople)
+														.addComponent(
+																numOfPeople)
 														.addComponent(evenAve)
 														.addComponent(oddAve)
-														.addComponent(relThemselves)
-														.addComponent(friendOfRel)
-														.addComponent(mostDisliked))
+														.addComponent(
+																relThemselves)
+														.addComponent(
+																friendOfRel)
+														.addComponent(
+																mostDisliked))
 										.addContainerGap(
 												javax.swing.GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)));
@@ -128,7 +135,8 @@ public class GUI{
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
 														.addComponent(jLabel1)
-														.addComponent(numOfPeople))
+														.addComponent(
+																numOfPeople))
 										.addGap(18, 18, 18)
 										.addGroup(
 												jPanel1Layout
@@ -149,21 +157,24 @@ public class GUI{
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
 														.addComponent(jLabel4)
-														.addComponent(relThemselves))
+														.addComponent(
+																relThemselves))
 										.addGap(18, 18, 18)
 										.addGroup(
 												jPanel1Layout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
 														.addComponent(jLabel5)
-														.addComponent(friendOfRel))
+														.addComponent(
+																friendOfRel))
 										.addGap(18, 18, 18)
 										.addGroup(
 												jPanel1Layout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
 														.addComponent(jLabel6)
-														.addComponent(mostDisliked))
+														.addComponent(
+																mostDisliked))
 										.addContainerGap(39, Short.MAX_VALUE)));
 
 		numOfPeople.getAccessibleContext().setAccessibleName("numberOfPeople");
@@ -277,7 +288,7 @@ public class GUI{
 	 */
 	public void show() {
 		frame.setTitle("SAS Challenge");
-		
+
 		try {
 			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
 					.getInstalledLookAndFeels()) {
@@ -287,26 +298,27 @@ public class GUI{
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			// java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE,
-			// null, ex);
-			System.out.println("bug");
+			java.util.logging.Logger.getLogger(GUI.class.getName()).log(
+					java.util.logging.Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			// java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE,
-			// null, ex);
-			System.out.println("bug");
+			java.util.logging.Logger.getLogger(GUI.class.getName()).log(
+					java.util.logging.Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			// java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE,
-			// null, ex);
-			System.out.println("bug");
+			java.util.logging.Logger.getLogger(GUI.class.getName()).log(
+					java.util.logging.Level.SEVERE, null, ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			// java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE,
-			// null, ex);
-			System.out.println("bug");
+			java.util.logging.Logger.getLogger(GUI.class.getName()).log(
+					java.util.logging.Level.SEVERE, null, ex);
 		}
 
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				Toolkit toolkit = Toolkit.getDefaultToolkit();
+				Dimension screenSize = toolkit.getScreenSize();
+				int x = (screenSize.width - frame.getWidth()) / 2;
+				int y = (screenSize.height - frame.getHeight()) / 2;
+				frame.setLocation(x, y);
 				frame.pack();
 				frame.setVisible(true);
 			}
