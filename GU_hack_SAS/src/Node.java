@@ -33,4 +33,12 @@ public class Node {
 	public long NumberOfDated() {
 		return this.hasDated.getListSize();
 	}
+	
+	public long numberOfRelationships() {
+		return dislikes.getListSize() + 
+				friendOf.getListSize() + 
+				knows.getListSize() + 
+				marriedTo.getListSize() + 
+				hasDated.getListSize();
+	}
 }
