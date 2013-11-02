@@ -61,36 +61,33 @@ public class Graph {
 	//Which person is disliked the most
 	public long theMostDislikedPerson()
 	{
-		iterateDislikes(this.fileMap);
-		Iterator it = this.fileMap.entrySet().iterator();
-		Node mostDisliked;
-		if (it.hasNext())
-		{
-			Map.Entry pairs = (Map.Entry)it.next();
-			mostDisliked = (Node)pairs.getValue();
+		HashMap<Long, Long> dislikes = new HashMap<Long, Long>();
+		iterateDislikes(this.fileMap, dislikes);
+		long maxDislikes = -1;
+		long maxDislikesId = -1;
+		for (long id : dislikes.keySet()) {
+			if (dislikes.get(id) > maxDislikes) {
+				maxDislikes = dislikes.get(id);
+				maxDislikesId = id;
+			}
 		}
-		else
-			return 0;			
-	    while (it.hasNext()) {
-	        Map.Entry pairs = (Map.Entry)it.next();
-	        Node curNode = (Node)pairs.getValue();
-	        if (curNode.getDislikedByNumOfPeople() > mostDisliked.getDislikedByNumOfPeople())
-	        	mostDisliked = curNode;
-	    }		
-		return mostDisliked.getDislikedByNumOfPeople();
+		return maxDislikesId;
 	}
 	
 	//increments the dislikedByNumOfPeople counter for each Node
-	public static void iterateDislikes(HashMap<Long, Node> map) {
-	    Iterator it = map.entrySet().iterator();
-	    while (it.hasNext()) {
-	        Map.Entry pairs = (Map.Entry)it.next();
-	        Node curNode = (Node)pairs.getValue();
-	        for(long n : curNode.getDislikes().getList())
-	        {
-	        	map.get(n).dislikedByNumOfPeople++;
-	        }
-	    }
+	public static void iterateDislikes(HashMap<Long, Node> map, 
+			HashMap<Long, Long> dislikes) {
+		
+		for (long key : map.keySet()) {
+			Node curNode = map.get(key);
+			for (long n : curNode.getDislikes().getList()) {
+				if (dislikes.containsKey(n)) {
+	        		dislikes.put(n, dislikes.get(n) + 1);
+	        	} else {
+	        		dislikes.put(n, 1L);
+	        	}
+			}
+		}
 	}
 	
 	public void addNode(long id) {
