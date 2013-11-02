@@ -224,7 +224,7 @@ public class GUI extends javax.swing.JFrame {
 	    /**
 	     * @param args the command line arguments
 	     */
-	    public static void main(String args[]) {
+	    public void show() {
 	        try {
 	            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 	                if ("Nimbus".equals(info.getName())) {
