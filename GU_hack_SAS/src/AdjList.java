@@ -3,8 +3,10 @@ import java.util.HashSet;
 
 public class AdjList {
 	private HashSet<AdjListNode> list;
+	private long id;
 	
-	public AdjList() {
+	public AdjList(long id) {
+		this.id = id;
 		this.list = new HashSet<AdjListNode>();
 	}
 	

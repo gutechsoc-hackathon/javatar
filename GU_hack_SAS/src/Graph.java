@@ -27,4 +27,6 @@ public class Graph {
 		System.out.println("Average num of relationships for odd: " + (1.0*odd_sum) / odd_count);
 		System.out.println("Average num of relationships for even: " + (1.0*even_sum) / even_count);
 	}
+	
+	
 }
