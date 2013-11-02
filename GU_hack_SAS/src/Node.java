@@ -112,4 +112,20 @@ public class Node {
 	public void setId(long id) {
 		this.id = id;
 	}
+	
+	public void addDislikes(long id) {
+		this.dislikes.add(id);
+	}
+	public void addFriend(long id) {
+		this.friendOf.add(id);
+	}
+	public void addKnows(long id) {
+		this.knows.add(id);
+	}
+	public void addMarried(long id) {
+		this.marriedTo.add(id);
+	}
+	public void addDated(long id) {
+		this.hasDated.add(id);
+	}
 }
