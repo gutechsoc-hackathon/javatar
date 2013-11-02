@@ -1,14 +1,7 @@
-import java.io.FileInputStream;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.regex.Pattern;
-
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
 public class Runner {
 	public static final Graph graph = new Graph();
@@ -17,8 +10,8 @@ public class Runner {
 	public static GUI ui;
 
 	public static void main(String[] args) throws IOException {
-		// BufferedReader in = null;
-		FileInputStream fis = null;
+		 BufferedReader in = null;
+		//FileInputStream fis = null;
 
 		// TODO working just needs to be out of the comment
 		/*
@@ -30,17 +23,16 @@ public class Runner {
 		*/
 		
 		ui = new GUI();
-		ui.show();
+		//ui.show();
 		
 		try {
-			fis = new FileInputStream("relationships-small.txt");
-			Scanner in = new Scanner(fis);
-			// in = new BufferedReader(new
-			// FileReader("relationships-small.txt"));
+			//fis = new FileInputStream("relationships-100m.txt");
+			//Scanner in = new Scanner(fis);
+			 in = new BufferedReader(new FileReader("relationships-100m.txt"));
 			String line = null;
 			String mainId = null;
-			while (in.hasNext()) {
-				line = in.nextLine();
+			while ((line = in.readLine()) != null) {
+				//line = in.nextLine();
 				line = line.trim();
 				if (!line.isEmpty()) {
 					String[] splittedLine = line.split(" ");
@@ -88,15 +80,16 @@ public class Runner {
 			e.printStackTrace();
 		}
 		
-		ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
-		//System.out.println("Number of people: " + graph.getSize());
+		//ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
+		System.out.println("Number of people: " + graph.getSize());
 		graph.averageRelationships();
-		ui.getRelThemselves().setText(String.valueOf(hasReleationshipWithHimself));
-		//System.out.println("Relationship with themselves: " + hasReleationshipWithHimself);
-		ui.getFriendOfRel().setText(String.valueOf(graph.countPeopleWithFriendOfRelationships()));
-		//System.out.println("# of people having double relationships : " + graph.countPeopleWithFriendOfRelationships());
-		ui.getMostDisliked().setText(String.valueOf(graph.theMostDislikedPerson()));
-		//System.out.println("Most disliked person: " + graph.theMostDislikedPerson());
+		//ui.getRelThemselves().setText(String.valueOf(hasReleationshipWithHimself));
+		System.out.println("Relationship with themselves: " + hasReleationshipWithHimself);
+		//ui.getFriendOfRel().setText(String.valueOf(graph.countPeopleWithFriendOfRelationships()));
+		System.out.println("# of people having double relationships : " + graph.countPeopleWithFriendOfRelationships());
+		//ui.getMostDisliked().setText(String.valueOf(graph.theMostDislikedPerson()));
+		System.out.println("Most disliked person: " + graph.theMostDislikedPerson());
+		//graph.longestCycle(807618169778923806L);
 	}
 
 	public static void isInRelationshipWithHimself(String a, String b) {

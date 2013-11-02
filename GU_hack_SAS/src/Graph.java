@@ -7,7 +7,7 @@ public class Graph {
 	private HashMap<Long, Node> fileMap;
 	
 	public Graph(){
-		 fileMap = new HashMap<Long,Node>();
+		 fileMap = new HashMap<Long,Node>(1<<10);
 	}
 	
 	public long getSize(){
@@ -25,10 +25,10 @@ public class Graph {
 				odd_sum += fileMap.get(id).numberOfRelationships();
 			}
 		}
-		Runner.ui.getEvenAve().setText(String.valueOf((1.0*even_sum) / even_count));
-		Runner.ui.getOddAve().setText(String.valueOf((1.0*odd_sum) / odd_count));
-		//System.out.println("Average num of relationships for odd: " + (1.0*odd_sum) / odd_count);
-		//System.out.println("Average num of relationships for even: " + (1.0*even_sum) / even_count);
+		//Runner.ui.getEvenAve().setText(String.valueOf((1.0*even_sum) / even_count));
+		//Runner.ui.getOddAve().setText(String.valueOf((1.0*odd_sum) / odd_count));
+		System.out.println("Average num of relationships for odd: " + (1.0*odd_sum) / odd_count);
+		System.out.println("Average num of relationships for even: " + (1.0*even_sum) / even_count);
 	}
 	
 	public long countPeopleWithFriendOfRelationships() {
@@ -140,10 +140,10 @@ public class Graph {
 			//node.inPath = true;
 			for (long neighbourId : node.getFriendOf().getList()) {
 				Node neighbour = fileMap.get(neighbourId);
-				if (!neighbour.visited) {
+				if (neighbour != null && !neighbour.visited) {
 					neighbour.visited = true;
 					stack.push(neighbourId);
-				} else {
+				} else if (neighbour != null){
 					System.out.println("The edge (" + node.getId() + ", " + neighbourId +") forms a cycle");
 				}
 			}

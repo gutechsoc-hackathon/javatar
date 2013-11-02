@@ -313,11 +313,11 @@ public class GUI {
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 				Toolkit toolkit = Toolkit.getDefaultToolkit();
 				Dimension screenSize = toolkit.getScreenSize();
 				int x = (screenSize.width - frame.getWidth()) / 2;
 				int y = (screenSize.height - frame.getHeight()) / 2;
+				frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 				frame.setLocation(x, y);
 				frame.pack();
 				frame.setVisible(true);
