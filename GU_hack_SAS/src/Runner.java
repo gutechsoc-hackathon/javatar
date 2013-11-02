@@ -27,8 +27,12 @@ public class Runner {
 			file = openFileDialog.getSelectedFile();
 		}
 		*/
+		
+		//GUI ui = new GUI();
+		//ui.show();
+		
 		try {
-			fis = new FileInputStream("relationships-small.txt");
+			fis = new FileInputStream("relationships.txt");
 			Scanner in = new Scanner(fis);
 			// in = new BufferedReader(new
 			// FileReader("relationships-small.txt"));
