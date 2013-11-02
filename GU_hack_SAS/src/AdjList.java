@@ -15,4 +15,8 @@ public class AdjList {
 	public void add(AdjListNode node) {
 		this.list.add(node);
 	}
+	
+	public boolean has(long id) {
+		return list.contains(new AdjListNode(id));
+	}
 }
