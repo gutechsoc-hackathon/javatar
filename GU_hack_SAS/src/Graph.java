@@ -1,6 +1,5 @@
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.Stack;
 
 
 public class Graph {
@@ -124,4 +123,34 @@ public class Graph {
 		this.fileMap = fileMap;
 	}
 	
+	long maxLen, curLen, curIndex, finalIndex;
+	public void longestCycle(long id) {
+		maxLen = 0;
+		
+		Node start = fileMap.get(id);
+		start.visited = true;
+		//start.inPath = true;
+		HashMap<Long, Long> added;
+		int awayFromStart = 0;
+		Stack<Long> stack = new Stack<Long>();
+		stack.push(id);
+		
+		while (stack.size() > 0) {
+			Node node = fileMap.get(stack.pop());
+			//node.inPath = true;
+			for (long neighbourId : node.getFriendOf().getList()) {
+				Node neighbour = fileMap.get(neighbourId);
+				if (!neighbour.visited) {
+					neighbour.visited = true;
+					stack.push(neighbourId);
+				} else {
+					System.out.println("The edge (" + node.getId() + ", " + neighbourId +") forms a cycle");
+				}
+			}
+			
+		}
+		// keeps all visited nodes and their distance from the beginning
+		//TODO initialize to unvisited
+		
+	}
 }

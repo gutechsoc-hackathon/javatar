@@ -1,5 +1,7 @@
 public class Node {
 	private long id;
+	public boolean visited;
+	public boolean inPath;
 	public AdjList dislikes;
 	public AdjList friendOf;
 	public AdjList knows;
@@ -8,6 +10,8 @@ public class Node {
 	public long dislikedByNumOfPeople;
 	
 	public Node(long id) {
+		this.visited = false;
+		this.inPath = false;
 		this.id = id;
 		this.dislikes = new AdjList(id);
 		this.friendOf = new AdjList(id);
