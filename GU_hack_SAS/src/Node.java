@@ -1,5 +1,5 @@
 public class Node {
-	
+	private long id;
 	public AdjList dislikes;
 	public AdjList friendOf;
 	public AdjList knows;
@@ -7,14 +7,17 @@ public class Node {
 	public AdjList hasDated;
 	public long dislikedByNumOfPeople;
 	
-	public Node() {
-		this.dislikes = new AdjList();
-		this.friendOf = new AdjList();
-		this.knows = new AdjList();
-		this.marriedTo = new AdjList();
-		this.hasDated = new AdjList();
+	public Node(long id) {
+		this.id = id;
+		this.dislikes = new AdjList(id);
+		this.friendOf = new AdjList(id);
+		this.knows = new AdjList(id);
+		this.marriedTo = new AdjList(id);
+		this.hasDated = new AdjList(id);
 	}
-
+	public long getId() {
+		return this.id;
+	}
 	public long NumberOfdislikes() {
 		return this.dislikes.getListSize();
 	}
