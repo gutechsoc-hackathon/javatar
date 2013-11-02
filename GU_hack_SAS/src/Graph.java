@@ -18,12 +18,10 @@ public class Graph {
 		for (long id : fileMap.keySet()) {
 			if (id % 2 == 0) {
 				even_count++;
-				// TODO sum all relationships
-				//even_sum += fileMap.get(id)
+				even_sum += fileMap.get(id).numberOfRelationships();
 			} else {
 				odd_count++;
-				// TODO sum all relationships
-				//even_sum += fileMap.get(id)
+				odd_sum += fileMap.get(id).numberOfRelationships();
 			}
 		}
 		System.out.println("Average num of relationships for odd: " + (1.0*odd_sum) / odd_count);
