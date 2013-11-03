@@ -50,7 +50,7 @@ public class PreviewJFrame {
         ImportController importController = Lookup.getDefault().lookup(ImportController.class);
         Container container;
         try {
-            File file = new File(getClass().getResource("/resources/graph2.gexf").toURI());
+            File file = new File(getClass().getResource("/resources/graph_temp4.gexf").toURI());
             container = importController.importFile(file);
         } catch (Exception ex) {
             ex.printStackTrace();
