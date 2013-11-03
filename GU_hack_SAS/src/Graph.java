@@ -221,7 +221,7 @@ public class Graph {
 				break;
 			}
 			if (connectedIds != null) {
-			mainIds.removeAll(connectedIds);
+				mainIds.removeAll(connectedIds);
 				clusterByFriends.add(connectedIds);
 			}
 			if(mainIds.isEmpty()){
