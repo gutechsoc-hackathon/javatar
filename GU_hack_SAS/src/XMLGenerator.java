@@ -68,6 +68,7 @@ public class XMLGenerator {
 			
 		}		
 		xmlEdges += "</edges>\n";
+		System.out.println("Exited Process Edges\n");
 	}
 	
 	public String createEdgeString(long edgeId, long source, long target)
@@ -98,6 +99,7 @@ public class XMLGenerator {
 			currentNode = "";
 		}		
 		xmlNodes += "</nodes>\n";
+		System.out.println("Exited Process Nodes\n");
 	}
 	
 	public String generateXML(HashMap<Long, Node> fileMap)
