@@ -212,10 +212,13 @@ public class Graph {
 		//TODO initialize to unvisited
 		return linked;
 	}
+	public long countConnectedComponents = 0;
 	public void partisionByFriends(){
 		Set<Long> mainIds = new HashSet<Long>(fileMap.keySet());
 		boolean isItRunning = true;
+		
 		while(isItRunning){
+			countConnectedComponents++;
 			Set<Long> connectedIds = null;
 			for(Long id: mainIds){
 				connectedIds=longestCycle(id);

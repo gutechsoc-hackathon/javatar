@@ -111,6 +111,8 @@ public class Runner {
 		//ui.getMostDisliked().setText(String.valueOf(graph.theMostDislikedPerson()));
 		System.out.println("Most disliked person: " + graph.theMostDislikedPerson());
 		//graph.longestCycle(807618169778923806L);
+		graph.partisionByFriends();
+		System.out.println("connected components = " + graph.countConnectedComponents + " longest cycle = " + graph.awayFromStart);
 
 		long end = System.currentTimeMillis();
 		System.out
