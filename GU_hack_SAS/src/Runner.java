@@ -86,8 +86,8 @@ public class Runner {
 			e.printStackTrace();
 		}
 		
-		graph.partisionByFriends();
-		System.out.println("Check clustering: " + graph.clusterByFriends.size() );
+		//graph.partisionByFriends();
+		//System.out.println("Check clustering: " + graph.clusterByFriends.size() );
 		//ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
 		System.out.println("Number of people: " + graph.getSize());
 		graph.averageRelationships();

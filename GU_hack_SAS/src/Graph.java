@@ -2,16 +2,17 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 
 public class Graph {
 
-	private static HashMap<Long, Node> fileMap;
+	private static TreeMap<Long, Node> fileMap;
 	public static Set<Set<Long>> clusterByFriends = new HashSet<Set<Long>>();
 	long odd_count, even_count, odd_sum, even_sum;
 	public Graph(){
-		 fileMap = new HashMap<Long,Node>(1<<10);
+		 fileMap = new TreeMap<Long,Node>();
 		 odd_count = odd_sum = even_count = even_sum = 0;
 	}
 	
@@ -60,8 +61,8 @@ public class Graph {
 	
 	public long countPeopleWithFriendOfRelationships() {
 		long count = 0;
-		for (long id : fileMap.keySet()) {
-			if (hasFriendOfRelationship(id)) {
+		for (Node node : fileMap.values()) {
+			if (hasFriendOfRelationship(node)) {
 				count++;
 			}
 		}
@@ -69,8 +70,8 @@ public class Graph {
 		
 	}
 	
-	private boolean hasFriendOfRelationship(long id) {
-		Node node = fileMap.get(id);
+	private boolean hasFriendOfRelationship(Node node) {
+		//Node node = fileMap.get(id);
 		//System.out.println("for node: " + id + " has friend list size = " + node.getFriendOfList().getListSize());
 		for (long friend : node.getFriendOfList().getList()) {
 			//System.out.println("check: " + friend);
@@ -78,7 +79,7 @@ public class Graph {
 			if (friendNode != null) {
 				//System.out.println("friend is not null " + friendNode.getId());
 			}
-			if (friendNode != null && friendNode.isFriendOf(id)) {
+			if (friendNode != null && friendNode.isFriendOf(node.getId())) {
 				//System.out.println("true");
 				return true;
 			}
@@ -103,7 +104,7 @@ public class Graph {
 	}
 	
 	//increments the dislikedByNumOfPeople counter for each Node
-	public static void iterateDislikes(HashMap<Long, Node> map, 
+	public static void iterateDislikes(TreeMap<Long, Node> map, 
 			HashMap<Long, Long> dislikes) {
 		
 		for (long key : map.keySet()) {
@@ -142,12 +143,8 @@ public class Graph {
 		fileMap.get(node).addKnows(knows);
 	}
 
-	public HashMap<Long, Node> getFileMap() {
+	public TreeMap<Long, Node> getFileMap() {
 		return fileMap;
-	}
-
-	public void setFileMap(HashMap<Long, Node> fileMap) {
-		this.fileMap = fileMap;
 	}
 	
 	static long maxLen;
