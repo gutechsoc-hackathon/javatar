@@ -1,21 +1,49 @@
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 
 public class Graph {
 
-	private HashMap<Long, Node> fileMap;
-	
+	private static TreeMap<Long, Node> fileMap;
+	public static Set<Set<Long>> clusterByFriends = new HashSet<Set<Long>>();
+	long odd_count, even_count, odd_sum, even_sum;
 	public Graph(){
-		 fileMap = new HashMap<Long,Node>(1<<10);
+		 fileMap = new TreeMap<Long,Node>();
+		 odd_count = odd_sum = even_count = even_sum = 0;
 	}
 	
 	public long getSize(){
 		return fileMap.size();
 	}
 	
+	public void setVisitedToFalse(){
+		for(long id: fileMap.keySet()){
+			fileMap.get(id).visited=false;
+		}
+	}
+	
+	public void incrementCount(long id)
+	{
+		if (id % 2 == 0)
+			even_count++;
+		else
+			odd_count++;
+	}
+	
+	public void incrementSum(long id)
+	{
+		if (id % 2 == 0)
+			even_sum++;
+		else
+			odd_sum++;
+	}
+	
 	public void averageRelationships(){
-		long odd_count = 0, even_count = 0, odd_sum = 0, even_sum = 0;
+		/*long odd_count = 0, even_count = 0, odd_sum = 0, even_sum = 0;
 		for (long id : fileMap.keySet()) {
 			if (id % 2 == 0) {
 				even_count++;
@@ -24,7 +52,7 @@ public class Graph {
 				odd_count++;
 				odd_sum += fileMap.get(id).numberOfRelationships();
 			}
-		}
+		}*/
 		//Runner.ui.getEvenAve().setText(String.valueOf((1.0*even_sum) / even_count));
 		//Runner.ui.getOddAve().setText(String.valueOf((1.0*odd_sum) / odd_count));
 		System.out.println("Average num of relationships for odd: " + (1.0*odd_sum) / odd_count);
@@ -33,8 +61,8 @@ public class Graph {
 	
 	public long countPeopleWithFriendOfRelationships() {
 		long count = 0;
-		for (long id : fileMap.keySet()) {
-			if (hasFriendOfRelationship(id)) {
+		for (Node node : fileMap.values()) {
+			if (hasFriendOfRelationship(node)) {
 				count++;
 			}
 		}
@@ -42,8 +70,8 @@ public class Graph {
 		
 	}
 	
-	private boolean hasFriendOfRelationship(long id) {
-		Node node = fileMap.get(id);
+	private boolean hasFriendOfRelationship(Node node) {
+		//Node node = fileMap.get(id);
 		//System.out.println("for node: " + id + " has friend list size = " + node.getFriendOfList().getListSize());
 		for (long friend : node.getFriendOfList().getList()) {
 			//System.out.println("check: " + friend);
@@ -51,7 +79,7 @@ public class Graph {
 			if (friendNode != null) {
 				//System.out.println("friend is not null " + friendNode.getId());
 			}
-			if (friendNode != null && friendNode.isFriendOf(id)) {
+			if (friendNode != null && friendNode.isFriendOf(node.getId())) {
 				//System.out.println("true");
 				return true;
 			}
@@ -76,7 +104,7 @@ public class Graph {
 	}
 	
 	//increments the dislikedByNumOfPeople counter for each Node
-	public static void iterateDislikes(HashMap<Long, Node> map, 
+	public static void iterateDislikes(TreeMap<Long, Node> map, 
 			HashMap<Long, Long> dislikes) {
 		
 		for (long key : map.keySet()) {
@@ -115,18 +143,16 @@ public class Graph {
 		fileMap.get(node).addKnows(knows);
 	}
 
-	public HashMap<Long, Node> getFileMap() {
+	public TreeMap<Long, Node> getFileMap() {
 		return fileMap;
 	}
-
-	public void setFileMap(HashMap<Long, Node> fileMap) {
-		this.fileMap = fileMap;
-	}
 	
-	long maxLen, curLen, curIndex, finalIndex;
-	public void longestCycle(long id) {
+	static long maxLen;
+	long curLen;
+	long curIndex;
+	long finalIndex;
+	public static Set<Long> longestCycle(long id) {
 		maxLen = 0;
-		
 		Node start = fileMap.get(id);
 		start.visited = true;
 		//start.inPath = true;
@@ -134,7 +160,8 @@ public class Graph {
 		int awayFromStart = 0;
 		Stack<Long> stack = new Stack<Long>();
 		stack.push(id);
-		
+		Set<Long> linked=new TreeSet<Long>();
+		linked.add(id);
 		while (stack.size() > 0) {
 			Node node = fileMap.get(stack.pop());
 			//node.inPath = true;
@@ -143,14 +170,66 @@ public class Graph {
 				if (neighbour != null && !neighbour.visited) {
 					neighbour.visited = true;
 					stack.push(neighbourId);
+					linked.add(neighbourId);
 				} else if (neighbour != null){
 					System.out.println("The edge (" + node.getId() + ", " + neighbourId +") forms a cycle");
 				}
 			}
 			
+			
 		}
 		// keeps all visited nodes and their distance from the beginning
 		//TODO initialize to unvisited
-		
+		return linked;
+	}
+	public void partisionByFriends(){
+		Set<Long> mainIds = new HashSet<Long>(fileMap.keySet());
+		boolean isItRunning = true;
+		while(isItRunning){
+			Set<Long> connectedIds = null;
+			for(Long id: mainIds){
+				connectedIds=longestCycle(id);
+				break;
+			}
+			if (connectedIds != null) {
+			mainIds.removeAll(connectedIds);
+				clusterByFriends.add(connectedIds);
+			}
+			if(mainIds.isEmpty()){
+				isItRunning=false;
+			}
+		}
+	}
+
+	public long getOdd_count() {
+		return odd_count;
+	}
+
+	public void setOdd_count(long odd_count) {
+		this.odd_count = odd_count;
+	}
+
+	public long getEven_count() {
+		return even_count;
+	}
+
+	public void setEven_count(long even_count) {
+		this.even_count = even_count;
+	}
+
+	public long getOdd_sum() {
+		return odd_sum;
+	}
+
+	public void setOdd_sum(long odd_sum) {
+		this.odd_sum = odd_sum;
+	}
+
+	public long getEven_sum() {
+		return even_sum;
+	}
+
+	public void setEven_sum(long even_sum) {
+		this.even_sum = even_sum;
 	}
 }

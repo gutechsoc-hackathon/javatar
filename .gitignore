@@ -1,7 +1,9 @@
 *.class
+*.classpath
 
 # Package Files #
 *.war
 *.ear
 *.metadata/
 *.txt
+*.gexf

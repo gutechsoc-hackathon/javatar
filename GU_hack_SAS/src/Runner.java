@@ -9,6 +9,7 @@ public class Runner {
 	public static long hasReleationshipWithHimself = 0;
 	public static long duplicate = 0;
 	public static GUI ui;
+	
 
 	public static void main(String[] args) throws IOException {
 		// BufferedReader in = null;
@@ -27,7 +28,7 @@ long count = 0;
 		//ui.show();
 		
 		try {
-			fis = new FileInputStream("relationships-100m.txt");
+			fis = new FileInputStream("relationships-small.txt");
 			Scanner in = new Scanner(fis);
 			// in = new BufferedReader(new
 			// FileReader("relationships-small.txt"));
@@ -50,6 +51,7 @@ long count = 0;
 							}
 							if(count > 1000000) {in.close(); fis.close(); break;}
 							mainId = splittedLine[0];
+							graph.incrementCount(Long.parseLong(mainId));
 							Runner.handleIdEntry(mainId);
 						}
 					} else {
@@ -59,6 +61,7 @@ long count = 0;
 							// splittedLine[1]);
 							Runner.isInRelationshipWithHimself(mainId,
 									splittedLine[1]);
+							graph.incrementSum(Long.parseLong(mainId));
 							// TODO: handle relationships
 							try {
 								Runner.addRelationship(mainId, splittedLine[0],
@@ -88,6 +91,8 @@ long count = 0;
 			e.printStackTrace();
 		}
 		
+		//graph.partisionByFriends();
+		//System.out.println("Check clustering: " + graph.clusterByFriends.size() );
 		//ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
 		System.out.println("Number of people: " + graph.getSize());
 		graph.averageRelationships();
@@ -122,12 +127,12 @@ long count = 0;
 			graph.addDislike(Long.parseLong(mainId), Long.parseLong(relId));
 		} else if (relationship.compareToIgnoreCase("friend_of") == 0) {
 			graph.addFriend(Long.parseLong(mainId), Long.parseLong(relId));
-		} else if (relationship.compareToIgnoreCase("knows") == 0) {
+		} /*else if (relationship.compareToIgnoreCase("knows") == 0) {
 			graph.addKnows(Long.parseLong(mainId), Long.parseLong(relId));
 		} else if (relationship.compareToIgnoreCase("married_to") == 0) {
 			graph.addMarried(Long.parseLong(mainId), Long.parseLong(relId));
 		} else if (relationship.compareToIgnoreCase("has_dated") == 0) {
 			graph.addDated(Long.parseLong(mainId), Long.parseLong(relId));
-		}
+		}*/
 	}
 }

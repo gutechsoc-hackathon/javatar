@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class XMLGenerator {
 	
@@ -28,46 +29,66 @@ public class XMLGenerator {
 		xmlBody = xmlEdges = xmlNodes = "";
 	}
 	
-	public void processEdges(HashMap<Long, Node> fileMap)
+	public void processEdges(TreeMap<Long, Node> fileMap)
 	{	
 		System.out.println("Entered Process Edges\n");
+		xmlNodes += "<nodes>\n";
+		String currentNode = "";
 		xmlEdges += "<edges>\n";
 		String currentEdge = "";
 		long edgeId = 0;
+		long count = 0;
 		for (Node node: fileMap.values())
 		{
+			if (count % 10000 == 0)
+				System.out.println("Yeeeaahh "+ count);
+			count++;
 			for (long id: node.dislikes.getList())
-			{
-				xmlEdges += createEdgeString(edgeId, node.getId(), id);
-				edgeId++;
+			{	
+				if(fileMap.containsKey(id)){
+					xmlEdges += createEdgeString(edgeId, node.getId(), id);
+					edgeId++;
+				}
 			}
 			
 			for (long id: node.knows.getList())
-			{
-				xmlEdges += createEdgeString(edgeId, node.getId(), id);
-				edgeId++;
+			{	
+				if(fileMap.containsKey(id)){
+					xmlEdges += createEdgeString(edgeId, node.getId(), id);
+					edgeId++;
+				}
 			}
 			
 			for (long id: node.marriedTo.getList())
 			{
-				xmlEdges += createEdgeString(edgeId, node.getId(), id);
-				edgeId++;
+				if(fileMap.containsKey(id)){
+					xmlEdges += createEdgeString(edgeId, node.getId(), id);
+					edgeId++;
+				}
 			}
 			
 			for (long id: node.hasDated.getList())
 			{
-				xmlEdges += createEdgeString(edgeId, node.getId(), id);
-				edgeId++;
+				if(fileMap.containsKey(id)){
+					xmlEdges += createEdgeString(edgeId, node.getId(), id);
+					edgeId++;
+				}
 			}
 			
 			for (long id: node.friendOf.getList())
 			{
-				xmlEdges += createEdgeString(edgeId, node.getId(), id);
-				edgeId++;
+				if(fileMap.containsKey(id)){
+					xmlEdges += createEdgeString(edgeId, node.getId(), id);
+					edgeId++;
+				}
 			}
+			xmlNodes += processNodes(node.getId());
+				
 			
-		}		
+		}	
+		xmlNodes += "</nodes>\n";
 		xmlEdges += "</edges>\n";
+		System.out.println("Exited Process Edges\n");
 	}
 	
 	public String createEdgeString(long edgeId, long source, long target)
@@ -82,27 +103,24 @@ public class XMLGenerator {
 		return edge;
 	}
 	
-	public void processNodes(Set<Long> keys)
+	public String processNodes(long id)
 	{
-		xmlNodes += "<nodes>\n";
+
+		//System.out.println("Entered Process Nodes with keys size\n");
 		String currentNode = "";
-		System.out.println("Entered Process Nodes with keys size="+ keys.size() + "\n");
-		for (long id: keys)
-		{
-			//System.out.println("Current id is: " + id + "\n");
-			currentNode += nodeOpen;
-			currentNode += "id=\"" + id + "\" ";
-			currentNode += "label=\"" + id + "\">\n";
-			currentNode += nodeClose;
-			xmlNodes += currentNode;
-			currentNode = "";
-		}		
-		xmlNodes += "</nodes>\n";
+		//System.out.println("Current id is: " + id + "\n");
+		currentNode += nodeOpen;
+		currentNode += "id=\"" + id + "\" ";
+		currentNode += "label=\"" + id + "\">\n";
+		currentNode += nodeClose;
+		
+		return currentNode;
+		//System.out.println("Exited Process Nodes\n");
 	}
 	
-	public String generateXML(HashMap<Long, Node> fileMap)
+	public String generateXML(TreeMap<Long, Node> fileMap)
 	{
-		processNodes(fileMap.keySet());
+		//processNodes(fileMap.keySet());
 		processEdges(fileMap);
 		xmlBody += xmlHeader + xmlNodes + xmlEdges + "</graph>\n" + "</gexf>\n";
 		return xmlBody;

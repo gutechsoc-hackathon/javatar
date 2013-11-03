@@ -1,14 +1,14 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
-public class RmiServer extends UnicastRemoteObject implements RmiServerIntf {
-	protected RmiServer() throws RemoteException {
+@SuppressWarnings("serial")
+public class LocalServer extends UnicastRemoteObject implements UserFunctions {
+	protected LocalServer() throws RemoteException {
 		super();
 	}
 
@@ -17,50 +17,55 @@ public class RmiServer extends UnicastRemoteObject implements RmiServerIntf {
 	public static long duplicate = 0;
 	public static GUI ui;
 
-	public static final String MESSAGE = "Hello world";
-
-	public String getMessage() {
-		return MESSAGE;
-	}
-	public long getNum(){
+	public long getNum() {
 		return graph.getSize();
 	}
-	
-	public void getAve(){
+
+	public void killServer() {
+		System.out.println("Server terminated");
+		System.exit(0);
+	}
+
+	public void getAve() {
 		graph.averageRelationships();
 	}
-	
-	public long getRelHimself(){
+
+	public long getRelHimself() {
 		return hasReleationshipWithHimself;
 	}
-	
-	public long getFROfRel(){
+
+	public long getFROfRel() {
 		return graph.countPeopleWithFriendOfRelationships();
 	}
-	
-	public long getDisliked(){
+
+	public long getDisliked() {
 		return graph.theMostDislikedPerson();
 	}
-	
 
 	public static void main(String args[]) throws Exception {
-		System.out.println("RMI server started");
+		System.out.println("Server started!");
 
-		try { // special exception handler for registry creation
-			LocateRegistry.createRegistry(1099);
-			System.out.println("java RMI registry created.");
-		} catch (RemoteException e) {
-			// do nothing, error means registry already exists
-			System.out.println("java RMI registry already exists.");
+		boolean canInitialize = false;
+		int port = 1099;
+		while (!canInitialize) {
+			try { // special exception handler for registry creation
+				LocateRegistry.createRegistry(port);
+				System.out.println("Registry created!");
+				canInitialize = true;
+			} catch (RemoteException e) {
+				// port busy, try next
+				port++;
+			}
 		}
+		System.out.println(port);
 
-		// Instantiate RmiServer
-		RmiServer obj = new RmiServer();
+		// Instantiate Server
+		LocalServer obj = new LocalServer();
 		obj.start();
 
 		// Bind this object instance to the name "RmiServer"
-		Naming.rebind("//localhost/RmiServer", obj);
-		System.out.println("PeerServer bound in registry");
+		Naming.rebind("//localhost:"+port+"/DataStructure", obj);
+		System.out.println("Server bound in registry");
 	}
 
 	private void start() {
@@ -80,7 +85,7 @@ public class RmiServer extends UnicastRemoteObject implements RmiServerIntf {
 		// ui.show();
 
 		try {
-			fis = new FileInputStream("relationships-1g.txt");
+			fis = new FileInputStream("relationships-small.txt");
 			Scanner in = new Scanner(fis);
 			// in = new BufferedReader(new
 			// FileReader("relationships-small.txt"));
@@ -105,8 +110,7 @@ public class RmiServer extends UnicastRemoteObject implements RmiServerIntf {
 						if (splittedLine.length == 2) {
 							// System.out.println(splittedLine[0] + " " +
 							// splittedLine[1]);
-							isInRelationshipWithHimself(mainId,
-									splittedLine[1]);
+							isInRelationshipWithHimself(mainId, splittedLine[1]);
 							// TODO: handle relationships
 							try {
 								addRelationship(mainId, splittedLine[0],
@@ -150,8 +154,8 @@ public class RmiServer extends UnicastRemoteObject implements RmiServerIntf {
 		}
 	}
 
-	public void addRelationship(String mainId, String relationship,
-			String relId) throws NumberFormatException {
+	public void addRelationship(String mainId, String relationship, String relId)
+			throws NumberFormatException {
 		if (relationship.compareToIgnoreCase("dislikes") == 0) {
 			graph.addDislike(Long.parseLong(mainId), Long.parseLong(relId));
 		} else if (relationship.compareToIgnoreCase("friend_of") == 0) {
@@ -164,6 +168,5 @@ public class RmiServer extends UnicastRemoteObject implements RmiServerIntf {
 			graph.addDated(Long.parseLong(mainId), Long.parseLong(relId));
 		}
 	}
-	
 
 }
