@@ -102,6 +102,7 @@ public class Runner {
 				+ String.valueOf(System.currentTimeMillis() - timer0));
 		long start = System.currentTimeMillis();
 		// ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
+		System.out.println("Number of dups: " + duplicate);
 		System.out.println("Number of people: " + graph.getSize());
 		graph.averageRelationships();
 		//ui.getRelThemselves().setText(String.valueOf(hasReleationshipWithHimself));
