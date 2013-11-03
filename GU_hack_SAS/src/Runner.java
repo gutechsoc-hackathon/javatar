@@ -105,16 +105,14 @@ public class Runner {
 		// ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
 		System.out.println("Number of people: " + graph.getSize());
 		graph.averageRelationships();
-		// ui.getRelThemselves().setText(String.valueOf(hasReleationshipWithHimself));
-		System.out.println("Relationship with themselves: "
-				+ hasReleationshipWithHimself);
-		// ui.getFriendOfRel().setText(String.valueOf(graph.countPeopleWithFriendOfRelationships()));
-		System.out.println("# of people having double relationships : "
-				+ graph.countPeopleWithFriendOfRelationships());
-		// ui.getMostDisliked().setText(String.valueOf(graph.theMostDislikedPerson()));
-		System.out.println("Most disliked person: "
-				+ graph.theMostDislikedPerson());
-		// graph.longestCycle(807618169778923806L);
+		//ui.getRelThemselves().setText(String.valueOf(hasReleationshipWithHimself));
+		System.out.println("Relationship with themselves: " + hasReleationshipWithHimself);
+		//ui.getFriendOfRel().setText(String.valueOf(graph.countPeopleWithFriendOfRelationships()));
+		System.out.println("# of people having double relationships : " + graph.countPeopleWithFriendOfRelationships());
+		//ui.getMostDisliked().setText(String.valueOf(graph.theMostDislikedPerson()));
+		System.out.println("Most disliked person: " + graph.theMostDislikedPerson());
+		//graph.longestCycle(807618169778923806L);
+
 		long end = System.currentTimeMillis();
 		System.out
 				.println("Runtime after reading: " + ((end - start) / 1000.0));

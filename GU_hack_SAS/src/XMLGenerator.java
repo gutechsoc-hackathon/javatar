@@ -43,6 +43,7 @@ public class XMLGenerator {
 			if (count % 10000 == 0)
 				System.out.println("Yeeeaahh "+ count);
 			count++;
+			/*
 			for (long id: node.dislikes.getList())
 			{	
 				if(fileMap.containsKey(id)){
@@ -74,7 +75,7 @@ public class XMLGenerator {
 					edgeId++;
 				}
 			}
-			
+			*/
 			for (long id: node.friendOf.getList())
 			{
 				if(fileMap.containsKey(id)){
