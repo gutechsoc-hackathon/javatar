@@ -103,6 +103,7 @@ public class Runner {
 				+ String.valueOf(System.currentTimeMillis() - timer0));
 		long start = System.currentTimeMillis();
 		// ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
+		System.out.println("Number of dups: " + duplicate);
 		System.out.println("Number of people: " + graph.getSize());
 		graph.averageRelationships();
 		//ui.getRelThemselves().setText(String.valueOf(hasReleationshipWithHimself));
@@ -112,6 +113,8 @@ public class Runner {
 		//ui.getMostDisliked().setText(String.valueOf(graph.theMostDislikedPerson()));
 		System.out.println("Most disliked person: " + graph.theMostDislikedPerson());
 		//graph.longestCycle(807618169778923806L);
+		graph.partisionByFriends();
+		System.out.println("connected components = " + graph.countConnectedComponents + " longest cycle = " + graph.awayFromStart);
 
 		long end = System.currentTimeMillis();
 		System.out
