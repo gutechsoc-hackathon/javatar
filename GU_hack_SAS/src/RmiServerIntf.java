@@ -11,4 +11,6 @@ public interface RmiServerIntf extends Remote {
 	public long getFROfRel() throws RemoteException;
 
 	public long getDisliked() throws RemoteException;
+	
+	public void killServer() throws RemoteException;
 }

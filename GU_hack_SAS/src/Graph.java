@@ -1,17 +1,26 @@
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
+import java.util.TreeSet;
 
 
 public class Graph {
 
-	private HashMap<Long, Node> fileMap;
-	
+	private static HashMap<Long, Node> fileMap;
+	public static Set<Set<Long>> clusterByFriends = new HashSet<Set<Long>>();
 	public Graph(){
 		 fileMap = new HashMap<Long,Node>(1<<10);
 	}
 	
 	public long getSize(){
 		return fileMap.size();
+	}
+	
+	public void setVisitedToFalse(){
+		for(long id: fileMap.keySet()){
+			fileMap.get(id).visited=false;
+		}
 	}
 	
 	public void averageRelationships(){
@@ -123,10 +132,12 @@ public class Graph {
 		this.fileMap = fileMap;
 	}
 	
-	long maxLen, curLen, curIndex, finalIndex;
-	public void longestCycle(long id) {
+	static long maxLen;
+	long curLen;
+	long curIndex;
+	long finalIndex;
+	public static Set<Long> longestCycle(long id) {
 		maxLen = 0;
-		
 		Node start = fileMap.get(id);
 		start.visited = true;
 		//start.inPath = true;
@@ -134,7 +145,8 @@ public class Graph {
 		int awayFromStart = 0;
 		Stack<Long> stack = new Stack<Long>();
 		stack.push(id);
-		
+		Set<Long> linked=new TreeSet<Long>();
+		linked.add(id);
 		while (stack.size() > 0) {
 			Node node = fileMap.get(stack.pop());
 			//node.inPath = true;
@@ -143,14 +155,34 @@ public class Graph {
 				if (neighbour != null && !neighbour.visited) {
 					neighbour.visited = true;
 					stack.push(neighbourId);
+					linked.add(neighbourId);
 				} else if (neighbour != null){
 					System.out.println("The edge (" + node.getId() + ", " + neighbourId +") forms a cycle");
 				}
 			}
 			
+			
 		}
 		// keeps all visited nodes and their distance from the beginning
 		//TODO initialize to unvisited
-		
+		return linked;
+	}
+	public void partisionByFriends(){
+		Set<Long> mainIds = new HashSet<Long>(fileMap.keySet());
+		boolean isItRunning = true;
+		while(isItRunning){
+			Set<Long> connectedIds = null;
+			for(Long id: mainIds){
+				connectedIds=longestCycle(id);
+				break;
+			}
+			if (connectedIds != null) {
+			mainIds.removeAll(connectedIds);
+				clusterByFriends.add(connectedIds);
+			}
+			if(mainIds.isEmpty()){
+				isItRunning=false;
+			}
+		}
 	}
 }
