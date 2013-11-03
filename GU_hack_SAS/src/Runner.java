@@ -4,8 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-import org.jfree.ui.about.SystemProperties;
-
 public class Runner {
 	public static final Graph graph = new Graph();
 	public static long hasReleationshipWithHimself = 0;
@@ -90,9 +88,6 @@ public class Runner {
 			in.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("ne 4ete ot faila -> v Runner");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("ne6to se barka s 4eteneto na liniq");
 			e.printStackTrace();
 		}
 		//graph.partisionByFriends();
