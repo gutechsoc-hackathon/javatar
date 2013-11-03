@@ -17,51 +17,55 @@ public class LocalServer extends UnicastRemoteObject implements UserFunctions {
 	public static long duplicate = 0;
 	public static GUI ui;
 
-	public long getNum(){
+	public long getNum() {
 		return graph.getSize();
 	}
-	
-	public void killServer(){
+
+	public void killServer() {
 		System.out.println("Server terminated");
 		System.exit(0);
 	}
-	
-	public void getAve(){
+
+	public void getAve() {
 		graph.averageRelationships();
 	}
-	
-	public long getRelHimself(){
+
+	public long getRelHimself() {
 		return hasReleationshipWithHimself;
 	}
-	
-	public long getFROfRel(){
+
+	public long getFROfRel() {
 		return graph.countPeopleWithFriendOfRelationships();
 	}
-	
-	public long getDisliked(){
+
+	public long getDisliked() {
 		return graph.theMostDislikedPerson();
 	}
-	
 
 	public static void main(String args[]) throws Exception {
-		System.out.println("RMI server started");
+		System.out.println("Server started!");
 
-		try { // special exception handler for registry creation
-			LocateRegistry.createRegistry(1099);
-			System.out.println("Registry created!");
-		} catch (RemoteException e) {
-			// do nothing, error means registry already exists
-			System.out.println("Fail to initialize.");
-			System.exit(0);
+		boolean canInitialize = false;
+		int port = 1099;
+		while (!canInitialize) {
+			try { // special exception handler for registry creation
+				LocateRegistry.createRegistry(port);
+				System.out.println("Registry created!");
+				canInitialize = true;
+			} catch (RemoteException e) {
+				// port busy, try next
+				port++;
+			}
 		}
+		System.out.println(port);
 
-		// Instantiate RmiServer
+		// Instantiate Server
 		LocalServer obj = new LocalServer();
 		obj.start();
 
 		// Bind this object instance to the name "RmiServer"
-		Naming.rebind("//localhost/DataStructure", obj);
-		System.out.println("PeerServer bound in registry");
+		Naming.rebind("//localhost:"+port+"/DataStructure", obj);
+		System.out.println("Server bound in registry");
 	}
 
 	private void start() {
@@ -81,7 +85,7 @@ public class LocalServer extends UnicastRemoteObject implements UserFunctions {
 		// ui.show();
 
 		try {
-			fis = new FileInputStream("relationships-100m.txt");
+			fis = new FileInputStream("relationships-small.txt");
 			Scanner in = new Scanner(fis);
 			// in = new BufferedReader(new
 			// FileReader("relationships-small.txt"));
@@ -106,8 +110,7 @@ public class LocalServer extends UnicastRemoteObject implements UserFunctions {
 						if (splittedLine.length == 2) {
 							// System.out.println(splittedLine[0] + " " +
 							// splittedLine[1]);
-							isInRelationshipWithHimself(mainId,
-									splittedLine[1]);
+							isInRelationshipWithHimself(mainId, splittedLine[1]);
 							// TODO: handle relationships
 							try {
 								addRelationship(mainId, splittedLine[0],
@@ -151,8 +154,8 @@ public class LocalServer extends UnicastRemoteObject implements UserFunctions {
 		}
 	}
 
-	public void addRelationship(String mainId, String relationship,
-			String relId) throws NumberFormatException {
+	public void addRelationship(String mainId, String relationship, String relId)
+			throws NumberFormatException {
 		if (relationship.compareToIgnoreCase("dislikes") == 0) {
 			graph.addDislike(Long.parseLong(mainId), Long.parseLong(relId));
 		} else if (relationship.compareToIgnoreCase("friend_of") == 0) {
@@ -165,6 +168,5 @@ public class LocalServer extends UnicastRemoteObject implements UserFunctions {
 			graph.addDated(Long.parseLong(mainId), Long.parseLong(relId));
 		}
 	}
-	
 
 }
