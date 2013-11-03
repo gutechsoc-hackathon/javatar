@@ -1,4 +1,3 @@
-import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,7 +28,8 @@ public class Runner {
 		
 		//ui = new GUI();
 		//ui.show();
-		
+		long start = System.currentTimeMillis();
+		System.out.println("start");
 		try {
 			fis = new FileInputStream("relationships-100m.txt");
 			Scanner in = new Scanner(fis);
@@ -48,10 +48,10 @@ public class Runner {
 							// System.out.println("SKOBA: " + splittedLine[0]);
 						} else {
 							// System.out.println("ID :" + splittedLine[0]);
-							count++;
+							/*count++;
 							if (count % 100000 == 0) {
 								System.out.println("Read " + count);
-							}
+							}*/
 							// if (count > 1000000) break;
 							mainId = splittedLine[0];
 							graph.incrementCount(Long.parseLong(mainId));
@@ -92,15 +92,16 @@ public class Runner {
 		}
 		//graph.partisionByFriends();
 
+
 		//System.out.println("The longest cycle is " + graph.awayFromStart + " people long");
+
 
 		//System.out.println("Check clustering: " + graph.clusterByFriends.size() );
 		//ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
-		System.out.println("Time for reading "
-				+ String.valueOf(System.currentTimeMillis() - timer0));
-		long start = System.currentTimeMillis();
+		//System.out.println("Time for reading "		+ String.valueOf(System.currentTimeMillis() - timer0));
+		//long start = System.currentTimeMillis();
 		// ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
-		System.out.println("Number of dups: " + duplicate);
+		//System.out.println("Number of dups: " + duplicate);
 		System.out.println("Number of people: " + graph.getSize());
 		graph.averageRelationships();
 		//ui.getRelThemselves().setText(String.valueOf(hasReleationshipWithHimself));
@@ -110,8 +111,8 @@ public class Runner {
 		//ui.getMostDisliked().setText(String.valueOf(graph.theMostDislikedPerson()));
 		System.out.println("Most disliked person: " + graph.theMostDislikedPerson());
 		//graph.longestCycle(807618169778923806L);
-		graph.partisionByFriends();
-		System.out.println("connected components = " + graph.countConnectedComponents + " longest cycle = " + graph.awayFromStart);
+		//graph.partisionByFriends();
+		//System.out.println("connected components = " + graph.countConnectedComponents + " longest cycle = " + graph.awayFromStart);
 
 		long end = System.currentTimeMillis();
 		System.out
