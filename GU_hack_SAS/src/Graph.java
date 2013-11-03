@@ -190,26 +190,6 @@ public class Graph {
 			//node.inPath = true;
 			for (long neighbourId : node.getFriendOf().getList()) {
 				Node neighbour = fileMap.get(neighbourId);
-				if(neighbourId == id) { //TODO You are checking only against the root not.
-					if(awayFromStart <( stack.size() + 2)){
-						System.out.println("Stack size " + stack.size());
-						awayFromStart = stack.size() + 2; 
-						longestCycleStartId = id;
-						longestCycleIds = (Stack<Long>)stack.clone();
-						longestCycleIds.push(node.getId());						
-					}
-				}
-				else if (linked.contains(neighbourId)){
-					if(awayFromStart < (stack.size() + 2 - stack.indexOf(neighbourId))){
-						System.out.println("Stack size " + stack.size());
-						awayFromStart = stack.size() + 2 - stack.indexOf(neighbourId); 
-						longestCycleStartId = neighbourId;
-						longestCycleIds.clear();
-						for (int i = stack.indexOf(neighbourId); i < stack.size(); i++)
-							longestCycleIds.push(stack.get(i));
-						longestCycleIds.push(node.getId());
-					}
-				}
 				if (neighbour != null && !neighbour.visited) {
 					neighbour.visited = true;
 					stack.push(neighbourId);
@@ -217,7 +197,32 @@ public class Graph {
 				} else if (neighbour != null){
 					//System.out.println("The edge (" + node.getId() + ", " + neighbourId +") forms a cycle");
 					//System.out.println("The edge (" + node.getId() + ", " + neighbourId +") is in the tree of ");
+					if(neighbourId == id) { //TODO You are checking only against the root not.
+						if(awayFromStart <( stack.size() + 1)){
+							//System.out.println("Stack size " + stack.size());
+							awayFromStart = stack.size() + 1; 
+							longestCycleStartId = id;
+							longestCycleIds = (Stack<Long>)stack.clone();
+							longestCycleIds.push(node.getId());						
+						}
+					}
+					else if (linked.contains(neighbourId)){
+						if(awayFromStart < (stack.size() - stack.indexOf(neighbourId))){
+							//System.out.println("Stack size " + stack.size());
+							awayFromStart = stack.size() - stack.indexOf(neighbourId); 
+							longestCycleStartId = neighbourId;
+							if(longestCycleIds!=null){longestCycleIds.clear();}
+							System.out.println("Stack :" + stack.toString());
+							System.out.println(neighbourId);
+							System.out.println("stack.size() - stack.indexOf(neighbourId) :" + (stack.size() - stack.indexOf(neighbourId) ));
+							/*for (int i = stack.indexOf(neighbourId); i < stack.size(); i++)
+								longestCycleIds.push(stack.get(i));
+							longestCycleIds.push(node.getId());*/
+						}
+					}
+				
 				}
+				
 			}
 		}
 		// keeps all visited nodes and their distance from the beginning
@@ -228,8 +233,13 @@ public class Graph {
 	public void partisionByFriends(){
 		Set<Long> mainIds = new HashSet<Long>(fileMap.keySet());
 		boolean isItRunning = true;
-		
+		long a = 0;
 		while(isItRunning){
+			/*a++;
+			if(a%10000==0){
+				System.out.println(a);
+			}*/
+			//System.out.println("Kolko ostavat :"+mainIds.size());
 			countConnectedComponents++;
 			Set<Long> connectedIds = null;
 			for(Long id: mainIds){
