@@ -96,7 +96,9 @@ public class Runner {
 			e.printStackTrace();
 		}
 		graph.partisionByFriends();
-		System.out.println("Longest cycle is of " + graph.awayFromStart + " people long!!");
+
+		System.out.println("The longest cycle is " + graph.awayFromStart + " people long");
+
 		//System.out.println("Check clustering: " + graph.clusterByFriends.size() );
 		//ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
 		System.out.println("Time for reading "

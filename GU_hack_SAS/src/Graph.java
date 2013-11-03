@@ -174,6 +174,7 @@ public class Graph {
 	long curLen;
 	long curIndex;
 	long finalIndex;
+	
 	public static Set<Long> longestCycle(long id) {
 		//setVisitedToFalse();
 		maxLen = 0;
@@ -182,20 +183,31 @@ public class Graph {
 		//start.inPath = true;
 		Stack<Long> stack = new Stack<Long>();
 		stack.push(id);
-		Set<Long> linked=new TreeSet<Long>();
+		Set<Long> linked = new TreeSet<Long>();
 		linked.add(id);
 		while (stack.size() > 0) {
 			Node node = fileMap.get(stack.pop());
 			//node.inPath = true;
 			for (long neighbourId : node.getFriendOf().getList()) {
 				Node neighbour = fileMap.get(neighbourId);
-				if(neighbourId == id){
-					if(awayFromStart<stack.size()+2){
+				if(neighbourId == id) { //TODO You are checking only against the root not.
+					if(awayFromStart <( stack.size() + 2)){
 						System.out.println("Stack size " + stack.size());
-						awayFromStart=stack.size()+2; 
+						awayFromStart = stack.size() + 2; 
 						longestCycleStartId = id;
-						longestCycleIds = stack;
-						
+						longestCycleIds = (Stack<Long>)stack.clone();
+						longestCycleIds.push(node.getId());						
+					}
+				}
+				else if (linked.contains(neighbourId)){
+					if(awayFromStart < (stack.size() + 2 - stack.indexOf(neighbourId))){
+						System.out.println("Stack size " + stack.size());
+						awayFromStart = stack.size() + 2 - stack.indexOf(neighbourId); 
+						longestCycleStartId = neighbourId;
+						longestCycleIds.clear();
+						for (int i = stack.indexOf(neighbourId); i < stack.size(); i++)
+							longestCycleIds.push(stack.get(i));
+						longestCycleIds.push(node.getId());
 					}
 				}
 				if (neighbour != null && !neighbour.visited) {
