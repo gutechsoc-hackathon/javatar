@@ -1,14 +1,10 @@
 f = open("relationships.txt", "r")
-out = open("relationships-100m.txt", "w")
+out = open("relationships-1g.txt", "w")
 count = 0
 for line in f :
-    if(count > 6000000):
-        for further_line in f:
-            if (further_line[0] != " "):
-                break;
-            else:
-                out.write(further_line)
+    if(count > 60000000 and line[0] != "}"):
         break
     out.write(line)
+    count += 1
 out.close()
 f.close()

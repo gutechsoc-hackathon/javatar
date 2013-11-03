@@ -1,4 +1,4 @@
-public class Node {
+public class Node implements Comparable<Node> {
 	private long id;
 	public boolean visited;
 	public boolean inPath;
@@ -139,5 +139,12 @@ public class Node {
 				"Knows: " + this.knows + 
 				"Has dated: " + this.hasDated +
 				"Married to: " + this.marriedTo;
+	}
+	
+	@Override
+	public int compareTo(Node other) {
+		if (this.id < other.id) return -1;
+		if (this.id > other.id) return 1;
+		return 0;
 	}
 }
