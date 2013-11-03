@@ -17,8 +17,8 @@ public class VisualiseGraph {
 		System.out.println("Finished reading woooow" + graph.getSize());
 		XMLGenerator xmlGen = new XMLGenerator();
 		System.out.println("HashMap size is = " + graph.getFileMap().size() + "\n");
-		String xmlString = xmlGen.generateXML(graph.getFileMap());
-		xmlGen.writeFile(xmlString);
+		//String xmlString = xmlGen.generateXML(graph.getFileMap());
+		//xmlGen.writeFile(xmlString);
 		PreviewJFrame.main(null);
     }
 	

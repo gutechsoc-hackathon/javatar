@@ -1,8 +1,8 @@
-f = open("relationships.txt", "r")
-out = open("relationships-1g.txt", "w")
+f = open("relationships-1g.txt", "r")
+out = open("relationships-mini.txt", "w")
 count = 0
 for line in f :
-    if(count > 60000000 and line[0] != "}"):
+    if(count > 3500 ):
         break
     out.write(line)
     count += 1
