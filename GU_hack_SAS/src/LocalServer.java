@@ -25,6 +25,10 @@ public class LocalServer extends UnicastRemoteObject implements UserFunctions {
 		System.out.println("Server terminated");
 		System.exit(0);
 	}
+	
+	public Graph getStructure(){
+		return graph;
+	}
 
 	public void getAve() {
 		graph.averageRelationships();
