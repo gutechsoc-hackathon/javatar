@@ -48,10 +48,11 @@ public class LocalServer extends UnicastRemoteObject implements UserFunctions {
 
 		try { // special exception handler for registry creation
 			LocateRegistry.createRegistry(1099);
-			System.out.println("java RMI registry created.");
+			System.out.println("Registry created!");
 		} catch (RemoteException e) {
 			// do nothing, error means registry already exists
-			System.out.println("java RMI registry already exists.");
+			System.out.println("Fail to initialize.");
+			System.exit(0);
 		}
 
 		// Instantiate RmiServer
@@ -59,7 +60,7 @@ public class LocalServer extends UnicastRemoteObject implements UserFunctions {
 		obj.start();
 
 		// Bind this object instance to the name "RmiServer"
-		Naming.rebind("//localhost/RmiServer", obj);
+		Naming.rebind("//localhost/DataStructure", obj);
 		System.out.println("PeerServer bound in registry");
 	}
 
