@@ -10,6 +10,9 @@ public class Graph {
 
 	private static TreeMap<Long, Node> fileMap;
 	private static TreeMap<Long, Long> dislikedMap;
+	public static long longestCycleStartId;
+	public static Stack<Long> longestCycleIds;
+	public static int awayFromStart = 0;
 	public static Set<Set<Long>> clusterByFriends = new HashSet<Set<Long>>();
 	long odd_count, even_count, odd_sum, even_sum;
 	public Graph(){
@@ -171,12 +174,11 @@ public class Graph {
 	long curIndex;
 	long finalIndex;
 	public static Set<Long> longestCycle(long id) {
+		//setVisitedToFalse();
 		maxLen = 0;
 		Node start = fileMap.get(id);
 		start.visited = true;
 		//start.inPath = true;
-		HashMap<Long, Long> added;
-		int awayFromStart = 0;
 		Stack<Long> stack = new Stack<Long>();
 		stack.push(id);
 		Set<Long> linked=new TreeSet<Long>();
@@ -186,16 +188,24 @@ public class Graph {
 			//node.inPath = true;
 			for (long neighbourId : node.getFriendOf().getList()) {
 				Node neighbour = fileMap.get(neighbourId);
+				if(neighbourId == id){
+					if(awayFromStart<stack.size()+2){
+						System.out.println("Stack size " + stack.size());
+						awayFromStart=stack.size()+2; 
+						longestCycleStartId = id;
+						longestCycleIds = stack;
+						
+					}
+				}
 				if (neighbour != null && !neighbour.visited) {
 					neighbour.visited = true;
 					stack.push(neighbourId);
 					linked.add(neighbourId);
 				} else if (neighbour != null){
-					System.out.println("The edge (" + node.getId() + ", " + neighbourId +") forms a cycle");
+					//System.out.println("The edge (" + node.getId() + ", " + neighbourId +") forms a cycle");
+					//System.out.println("The edge (" + node.getId() + ", " + neighbourId +") is in the tree of ");
 				}
 			}
-			
-			
 		}
 		// keeps all visited nodes and their distance from the beginning
 		//TODO initialize to unvisited
