@@ -4,7 +4,7 @@ public class KillQuery {
 	public static void main(String args[]) throws Exception {
 
 		UserFunctions obj = (UserFunctions) Naming
-				.lookup("//localhost/RmiServer");
+				.lookup("//localhost/DataStructure");
 		obj.killServer();
 	}
 }
