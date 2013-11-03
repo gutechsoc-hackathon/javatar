@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+import org.jfree.ui.about.SystemProperties;
+
 public class Runner {
 	public static final Graph graph = new Graph();
 	public static long hasReleationshipWithHimself = 0;
@@ -11,6 +13,8 @@ public class Runner {
 	public static GUI ui;
 
 	public static void main(String[] args) throws IOException {
+
+		long timer0 = System.currentTimeMillis();
 		// BufferedReader in = null;
 		long count = 0;
 		FileInputStream fis = null;
@@ -18,17 +22,16 @@ public class Runner {
 		// TODO working just needs to be out of the comment
 		/*
 		 * File file = null; JFileChooser openFileDialog = new JFileChooser();
-		 * int filePath = openFileDialog.showDialog(null, "Open");
-		if (filePath==JFileChooser.APPROVE_OPTION){
-			file = openFileDialog.getSelectedFile();
-		}
-		*/
-		
-		//ui = new GUI();
-		//ui.show();
-		
+		 * int filePath = openFileDialog.showDialog(null, "Open"); if
+		 * (filePath==JFileChooser.APPROVE_OPTION){ file =
+		 * openFileDialog.getSelectedFile(); }
+		 */
+
+		// ui = new GUI();
+		// ui.show();
+
 		try {
-			fis = new FileInputStream("relationships-100m.txt");
+			fis = new FileInputStream("relationships-1g.txt");
 			Scanner in = new Scanner(fis);
 			// in = new BufferedReader(new
 			// FileReader("relationships-small.txt"));
@@ -46,10 +49,10 @@ public class Runner {
 						} else {
 							// System.out.println("ID :" + splittedLine[0]);
 							count++;
-							if (count % 10000 == 0) {
+							if (count % 100000 == 0) {
 								System.out.println("Read " + count);
 							}
-								if (count > 1000000) break;
+							// if (count > 1000000) break;
 							mainId = splittedLine[0];
 							Runner.handleIdEntry(mainId);
 						}
@@ -78,7 +81,7 @@ public class Runner {
 
 					}
 				}
-				
+
 			}
 			in.close();
 		} catch (FileNotFoundException e) {
@@ -88,19 +91,25 @@ public class Runner {
 			System.out.println("ne6to se barka s 4eteneto na liniq");
 			e.printStackTrace();
 		}
+		System.out.println("Time for reading "
+				+ String.valueOf(System.currentTimeMillis() - timer0));
 		long start = System.currentTimeMillis();
-		//ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
+		// ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
 		System.out.println("Number of people: " + graph.getSize());
 		graph.averageRelationships();
-		//ui.getRelThemselves().setText(String.valueOf(hasReleationshipWithHimself));
-		System.out.println("Relationship with themselves: " + hasReleationshipWithHimself);
-		//ui.getFriendOfRel().setText(String.valueOf(graph.countPeopleWithFriendOfRelationships()));
-		System.out.println("# of people having double relationships : " + graph.countPeopleWithFriendOfRelationships());
-		//ui.getMostDisliked().setText(String.valueOf(graph.theMostDislikedPerson()));
-		System.out.println("Most disliked person: " + graph.theMostDislikedPerson());
-		//graph.longestCycle(807618169778923806L);
+		// ui.getRelThemselves().setText(String.valueOf(hasReleationshipWithHimself));
+		System.out.println("Relationship with themselves: "
+				+ hasReleationshipWithHimself);
+		// ui.getFriendOfRel().setText(String.valueOf(graph.countPeopleWithFriendOfRelationships()));
+		System.out.println("# of people having double relationships : "
+				+ graph.countPeopleWithFriendOfRelationships());
+		// ui.getMostDisliked().setText(String.valueOf(graph.theMostDislikedPerson()));
+		System.out.println("Most disliked person: "
+				+ graph.theMostDislikedPerson());
+		// graph.longestCycle(807618169778923806L);
 		long end = System.currentTimeMillis();
-		System.out.println("Runtime after reading: " + ((end - start)/1000.0));
+		System.out
+				.println("Runtime after reading: " + ((end - start) / 1000.0));
 	}
 
 	public static void isInRelationshipWithHimself(String a, String b) {
