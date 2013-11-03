@@ -31,7 +31,7 @@ public class Runner {
 		//ui.show();
 		
 		try {
-			fis = new FileInputStream("relationships-small.txt");
+			fis = new FileInputStream("relationships-100m.txt");
 			Scanner in = new Scanner(fis);
 			// in = new BufferedReader(new
 			// FileReader("relationships-small.txt"));
@@ -90,9 +90,9 @@ public class Runner {
 			System.out.println("ne 4ete ot faila -> v Runner");
 			e.printStackTrace();
 		}
-		graph.partisionByFriends();
+		//graph.partisionByFriends();
 
-		System.out.println("The longest cycle is " + graph.awayFromStart + " people long");
+		//System.out.println("The longest cycle is " + graph.awayFromStart + " people long");
 
 		//System.out.println("Check clustering: " + graph.clusterByFriends.size() );
 		//ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
