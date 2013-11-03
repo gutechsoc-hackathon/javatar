@@ -212,9 +212,9 @@ public class Graph {
 							awayFromStart = stack.size() - stack.indexOf(neighbourId); 
 							longestCycleStartId = neighbourId;
 							if(longestCycleIds!=null){longestCycleIds.clear();}
-							System.out.println("Stack :" + stack.toString());
-							System.out.println(neighbourId);
-							System.out.println("stack.size() - stack.indexOf(neighbourId) :" + (stack.size() - stack.indexOf(neighbourId) ));
+							//System.out.println("Stack :" + stack.toString());
+							//System.out.println(neighbourId);
+							//System.out.println("stack.size() - stack.indexOf(neighbourId) :" + (stack.size() - stack.indexOf(neighbourId) ));
 							/*for (int i = stack.indexOf(neighbourId); i < stack.size(); i++)
 								longestCycleIds.push(stack.get(i));
 							longestCycleIds.push(node.getId());*/

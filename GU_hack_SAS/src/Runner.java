@@ -92,15 +92,12 @@ public class Runner {
 		} catch (FileNotFoundException e) {
 			System.out.println("ne 4ete ot faila -> v Runner");
 			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("ne6to se barka s 4eteneto na liniq");
-			e.printStackTrace();
-		}
+		} 
 		
 		
-		graph.partisionByFriends();
+		//graph.partisionByFriends();
 
-		System.out.println("The longest cycle is " + graph.awayFromStart + " people long. Starts with: " + graph.longestCycleStartId);
+		//System.out.println("The longest cycle is " + graph.awayFromStart + " people long. Starts with: " + graph.longestCycleStartId);
 
 		//System.out.println("Check clustering: " + graph.clusterByFriends.size() );
 		//ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
@@ -108,14 +105,14 @@ public class Runner {
 		//long start = System.currentTimeMillis();
 		// ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
 		//System.out.println("Number of dups: " + duplicate);
-		//System.out.println("Number of people: " + graph.getSize());
-		//graph.averageRelationships();
+		System.out.println("Number of people: " + graph.getSize());
+		graph.averageRelationships();
 		//ui.getRelThemselves().setText(String.valueOf(hasReleationshipWithHimself));
-		//System.out.println("Relationship with themselves: " + hasReleationshipWithHimself);
+		System.out.println("Relationship with themselves: " + hasReleationshipWithHimself);
 		//ui.getFriendOfRel().setText(String.valueOf(graph.countPeopleWithFriendOfRelationships()));
-		//System.out.println("# of people having double relationships : " + graph.countPeopleWithFriendOfRelationships());
+		System.out.println("# of people having double relationships : " + graph.countPeopleWithFriendOfRelationships());
 		//ui.getMostDisliked().setText(String.valueOf(graph.theMostDislikedPerson()));
-		//System.out.println("Most disliked person: " + graph.theMostDislikedPerson());
+		System.out.println("Most disliked person: " + graph.theMostDislikedPerson());
 		//graph.longestCycle(807618169778923806L);
 		//graph.partisionByFriends();
 		//System.out.println("connected components = " + graph.countConnectedComponents + " longest cycle = " + graph.awayFromStart);
