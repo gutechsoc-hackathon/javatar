@@ -1,10 +1,7 @@
-import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
-
-import org.jfree.ui.about.SystemProperties;
 
 public class Runner {
 	public static final Graph graph = new Graph();
@@ -92,9 +89,7 @@ public class Runner {
 		} catch (FileNotFoundException e) {
 			System.out.println("ne 4ete ot faila -> v Runner");
 			e.printStackTrace();
-		} 
-		
-		
+		}
 		//graph.partisionByFriends();
 
 		//System.out.println("The longest cycle is " + graph.awayFromStart + " people long. Starts with: " + graph.longestCycleStartId);

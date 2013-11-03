@@ -13,4 +13,11 @@ public interface UserFunctions extends Remote {
 	public long getDisliked() throws RemoteException;
 	
 	public void killServer() throws RemoteException;
+	
+	public Graph getStructure() throws RemoteException;
+	
+	public double getEvenAve() throws RemoteException;
+	
+	public double getOddAve() throws RemoteException;
+	
 }
