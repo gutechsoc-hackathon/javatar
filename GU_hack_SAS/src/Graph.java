@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
@@ -8,15 +9,25 @@ import java.util.TreeSet;
 public class Graph {
 
 	private static TreeMap<Long, Node> fileMap;
+	private static TreeMap<Long, Long> dislikedMap;
 	public static Set<Set<Long>> clusterByFriends = new HashSet<Set<Long>>();
 	long odd_count, even_count, odd_sum, even_sum;
 	public Graph(){
 		 fileMap = new TreeMap<Long,Node>();
+		 dislikedMap = new TreeMap<Long, Long>();
 		 odd_count = odd_sum = even_count = even_sum = 0;
 	}
 	
 	public long getSize(){
 		return fileMap.size();
+	}
+	
+	public void addDisliked(long id){
+		Long count = dislikedMap.get(id);
+		if (count == null)
+			count = 0L;
+		count++;
+		dislikedMap.put(id, count);			
 	}
 	
 	public void setVisitedToFalse(){
@@ -89,7 +100,7 @@ public class Graph {
 	//Which person is disliked the most
 	public long theMostDislikedPerson()
 	{
-		HashMap<Long, Long> dislikes = new HashMap<Long, Long>();
+		/*HashMap<Long, Long> dislikes = new HashMap<Long, Long>();
 		iterateDislikes(this.fileMap, dislikes);
 		long maxDislikes = -1;
 		long maxDislikesId = -1;
@@ -99,7 +110,16 @@ public class Graph {
 				maxDislikesId = id;
 			}
 		}
-		return maxDislikesId;
+		return maxDislikesId;*/
+		long max = -1;
+		long maxId = -1;
+		for(Map.Entry<Long,Long> entry : dislikedMap.entrySet()) {
+			if (entry.getValue() > max){				
+				max = entry.getValue();
+				maxId = entry.getKey();
+			}
+		}
+		return maxId;
 	}
 	
 	//increments the dislikedByNumOfPeople counter for each Node

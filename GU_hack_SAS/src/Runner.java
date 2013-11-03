@@ -23,7 +23,6 @@ public class Runner {
 		// TODO working just needs to be out of the comment
 		/*
 		 * File file = null; JFileChooser openFileDialog = new JFileChooser();
-<<<<<<< HEAD
 		 * int filePath = openFileDialog.showDialog(null, "Open");
 		if (filePath==JFileChooser.APPROVE_OPTION){
 			file = openFileDialog.getSelectedFile();
@@ -139,7 +138,8 @@ public class Runner {
 	public static void addRelationship(String mainId, String relationship,
 			String relId) throws NumberFormatException {
 		if (relationship.compareToIgnoreCase("dislikes") == 0) {
-			graph.addDislike(Long.parseLong(mainId), Long.parseLong(relId));
+			graph.addDisliked(Long.parseLong(relId));
+			//graph.addDislike(Long.parseLong(mainId), Long.parseLong(relId));
 		} else if (relationship.compareToIgnoreCase("friend_of") == 0) {
 			graph.addFriend(Long.parseLong(mainId), Long.parseLong(relId));
 		} /*else if (relationship.compareToIgnoreCase("knows") == 0) {
