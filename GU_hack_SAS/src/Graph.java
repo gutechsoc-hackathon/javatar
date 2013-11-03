@@ -91,7 +91,7 @@ public class Graph {
 	public long theMostDislikedPerson()
 	{
 		HashMap<Long, Long> dislikes = new HashMap<Long, Long>();
-		iterateDislikes(this.fileMap, dislikes);
+		//iterateDislikes(this.fileMap, dislikes);
 		long maxDislikes = -1;
 		long maxDislikesId = -1;
 		for (long id : dislikes.keySet()) {
@@ -104,6 +104,7 @@ public class Graph {
 	}
 	
 	//increments the dislikedByNumOfPeople counter for each Node
+	/*
 	public static void iterateDislikes(TreeMap<Long, Node> map, 
 			HashMap<Long, Long> dislikes) {
 		
@@ -118,7 +119,7 @@ public class Graph {
 			}
 		}
 	}
-	
+	*/
 	public void addNode(long id) {
 		this.fileMap.put(id, new Node(id));
 	}
@@ -126,7 +127,7 @@ public class Graph {
 	public void addFriend(long node, long friend) {
 		fileMap.get(node).addFriend(friend);
 	}
-	
+	/*
 	public void addDislike(long node, long dislikes) {
 		fileMap.get(node).addDislikes(dislikes);
 	}
@@ -142,7 +143,7 @@ public class Graph {
 	public void addKnows(long node, long knows) {
 		fileMap.get(node).addKnows(knows);
 	}
-
+*/
 	public TreeMap<Long, Node> getFileMap() {
 		return fileMap;
 	}

@@ -7,7 +7,7 @@ public class AdjList {
 
 	public AdjList(long id) {
 		this.id = id;
-		this.list = new HashSet<Long>();
+		this.list = new HashSet<Long>(4);
 	}
 
 	public void add(long id) {

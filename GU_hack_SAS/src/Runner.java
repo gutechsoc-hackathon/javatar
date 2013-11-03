@@ -101,7 +101,7 @@ long count = 0;
 		//ui.getFriendOfRel().setText(String.valueOf(graph.countPeopleWithFriendOfRelationships()));
 		System.out.println("# of people having double relationships : " + graph.countPeopleWithFriendOfRelationships());
 		//ui.getMostDisliked().setText(String.valueOf(graph.theMostDislikedPerson()));
-		System.out.println("Most disliked person: " + graph.theMostDislikedPerson());
+		//SSystem.out.println("Most disliked person: " + graph.theMostDislikedPerson());
 		//graph.longestCycle(807618169778923806L);
 	}
 
@@ -123,9 +123,9 @@ long count = 0;
 
 	public static void addRelationship(String mainId, String relationship,
 			String relId) throws NumberFormatException {
-		if (relationship.compareToIgnoreCase("dislikes") == 0) {
+		/*if (relationship.compareToIgnoreCase("dislikes") == 0) {
 			graph.addDislike(Long.parseLong(mainId), Long.parseLong(relId));
-		} else if (relationship.compareToIgnoreCase("friend_of") == 0) {
+		} else*/ if (relationship.compareToIgnoreCase("friend_of") == 0) {
 			graph.addFriend(Long.parseLong(mainId), Long.parseLong(relId));
 		} /*else if (relationship.compareToIgnoreCase("knows") == 0) {
 			graph.addKnows(Long.parseLong(mainId), Long.parseLong(relId));
