@@ -126,6 +126,7 @@ public class Graph {
 	}
 	
 	//increments the dislikedByNumOfPeople counter for each Node
+	/*
 	public static void iterateDislikes(TreeMap<Long, Node> map, 
 			HashMap<Long, Long> dislikes) {
 		
@@ -140,7 +141,7 @@ public class Graph {
 			}
 		}
 	}
-	
+	*/
 	public void addNode(long id) {
 		this.fileMap.put(id, new Node(id));
 	}
@@ -148,7 +149,7 @@ public class Graph {
 	public void addFriend(long node, long friend) {
 		fileMap.get(node).addFriend(friend);
 	}
-	
+	/*
 	public void addDislike(long node, long dislikes) {
 		fileMap.get(node).addDislikes(dislikes);
 	}
@@ -164,7 +165,7 @@ public class Graph {
 	public void addKnows(long node, long knows) {
 		fileMap.get(node).addKnows(knows);
 	}
-
+*/
 	public TreeMap<Long, Node> getFileMap() {
 		return fileMap;
 	}
@@ -223,10 +224,13 @@ public class Graph {
 		//TODO initialize to unvisited
 		return linked;
 	}
+	public long countConnectedComponents = 0;
 	public void partisionByFriends(){
 		Set<Long> mainIds = new HashSet<Long>(fileMap.keySet());
 		boolean isItRunning = true;
+		
 		while(isItRunning){
+			countConnectedComponents++;
 			Set<Long> connectedIds = null;
 			for(Long id: mainIds){
 				connectedIds=longestCycle(id);
