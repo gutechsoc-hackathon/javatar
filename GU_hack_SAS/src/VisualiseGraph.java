@@ -117,16 +117,16 @@ public class VisualiseGraph {
 
 	public static void addRelationship(String mainId, String relationship,
 			String relId) throws NumberFormatException {
-		if (relationship.compareToIgnoreCase("dislikes") == 0) {
+		/*if (relationship.compareToIgnoreCase("dislikes") == 0) {
 			graph.addDislike(Long.parseLong(mainId), Long.parseLong(relId));
-		} else if (relationship.compareToIgnoreCase("friend_of") == 0) {
+		} else*/ if (relationship.compareToIgnoreCase("friend_of") == 0) {
 			graph.addFriend(Long.parseLong(mainId), Long.parseLong(relId));
-		} else if (relationship.compareToIgnoreCase("knows") == 0) {
+		}/* else if (relationship.compareToIgnoreCase("knows") == 0) {
 			graph.addKnows(Long.parseLong(mainId), Long.parseLong(relId));
 		} else if (relationship.compareToIgnoreCase("married_to") == 0) {
 			graph.addMarried(Long.parseLong(mainId), Long.parseLong(relId));
 		} else if (relationship.compareToIgnoreCase("has_dated") == 0) {
 			graph.addDated(Long.parseLong(mainId), Long.parseLong(relId));
-		}
+		}*/
 	}
 }

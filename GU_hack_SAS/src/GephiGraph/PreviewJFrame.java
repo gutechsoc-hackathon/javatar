@@ -52,6 +52,7 @@ public class PreviewJFrame {
         Container container;
         try {
             File file = new File(getClass().getResource("/resources/graph_mini.gexf").toURI());
+
             container = importController.importFile(file);
         } catch (Exception ex) {
             ex.printStackTrace();

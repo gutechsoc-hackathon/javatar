@@ -12,9 +12,12 @@ public class Runner {
 	
 
 	public static void main(String[] args) throws IOException {
+
+		long timer0 = System.currentTimeMillis();
 		// BufferedReader in = null;
+		long count = 0;
 		FileInputStream fis = null;
-long count = 0;
+		//long count = 0;
 		// TODO working just needs to be out of the comment
 		/*
 		 * File file = null; JFileChooser openFileDialog = new JFileChooser();
@@ -46,10 +49,10 @@ long count = 0;
 						} else {
 							// System.out.println("ID :" + splittedLine[0]);
 							count++;
-							if (count % 10000 == 0) {
-								System.out.println("read " + count);
+							if (count % 100000 == 0) {
+								System.out.println("Read " + count);
 							}
-							if(count > 1000000) {in.close(); fis.close(); break;}
+							// if (count > 1000000) break;
 							mainId = splittedLine[0];
 							graph.incrementCount(Long.parseLong(mainId));
 							Runner.handleIdEntry(mainId);
@@ -80,20 +83,24 @@ long count = 0;
 
 					}
 				}
-				
+
 			}
 			in.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("ne 4ete ot faila -> v Runner");
 			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("ne6to se barka s 4eteneto na liniq");
-			e.printStackTrace();
 		}
-		
-		//graph.partisionByFriends();
+		graph.partisionByFriends();
+
+		System.out.println("The longest cycle is " + graph.awayFromStart + " people long");
+
 		//System.out.println("Check clustering: " + graph.clusterByFriends.size() );
 		//ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
+		System.out.println("Time for reading "
+				+ String.valueOf(System.currentTimeMillis() - timer0));
+		long start = System.currentTimeMillis();
+		// ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
+		System.out.println("Number of dups: " + duplicate);
 		System.out.println("Number of people: " + graph.getSize());
 		graph.averageRelationships();
 		//ui.getRelThemselves().setText(String.valueOf(hasReleationshipWithHimself));
@@ -103,6 +110,12 @@ long count = 0;
 		//ui.getMostDisliked().setText(String.valueOf(graph.theMostDislikedPerson()));
 		System.out.println("Most disliked person: " + graph.theMostDislikedPerson());
 		//graph.longestCycle(807618169778923806L);
+		graph.partisionByFriends();
+		System.out.println("connected components = " + graph.countConnectedComponents + " longest cycle = " + graph.awayFromStart);
+
+		long end = System.currentTimeMillis();
+		System.out
+				.println("Runtime after reading: " + ((end - start) / 1000.0));
 	}
 
 	public static void isInRelationshipWithHimself(String a, String b) {
@@ -124,7 +137,8 @@ long count = 0;
 	public static void addRelationship(String mainId, String relationship,
 			String relId) throws NumberFormatException {
 		if (relationship.compareToIgnoreCase("dislikes") == 0) {
-			graph.addDislike(Long.parseLong(mainId), Long.parseLong(relId));
+			graph.addDisliked(Long.parseLong(relId));
+			//graph.addDislike(Long.parseLong(mainId), Long.parseLong(relId));
 		} else if (relationship.compareToIgnoreCase("friend_of") == 0) {
 			graph.addFriend(Long.parseLong(mainId), Long.parseLong(relId));
 		} /*else if (relationship.compareToIgnoreCase("knows") == 0) {

@@ -25,6 +25,10 @@ public class LocalServer extends UnicastRemoteObject implements UserFunctions {
 		System.out.println("Server terminated");
 		System.exit(0);
 	}
+	
+	public Graph getStructure(){
+		return graph;
+	}
 
 	public void getAve() {
 		graph.averageRelationships();
@@ -41,6 +45,17 @@ public class LocalServer extends UnicastRemoteObject implements UserFunctions {
 	public long getDisliked() {
 		return graph.theMostDislikedPerson();
 	}
+	
+	public double getOddAve(){
+		return 0;
+		
+	}
+	
+	public double getEvenAve(){
+		return 0;
+		
+	}
+	
 
 	public static void main(String args[]) throws Exception {
 		System.out.println("Server started!");
@@ -70,20 +85,23 @@ public class LocalServer extends UnicastRemoteObject implements UserFunctions {
 
 	private void start() {
 
+		long timer0 = System.currentTimeMillis();
 		// BufferedReader in = null;
+		long count = 0;
 		FileInputStream fis = null;
-
+		//long count = 0;
 		// TODO working just needs to be out of the comment
 		/*
 		 * File file = null; JFileChooser openFileDialog = new JFileChooser();
-		 * int filePath = openFileDialog.showDialog(null, "Open"); if
-		 * (filePath==JFileChooser.APPROVE_OPTION){ file =
-		 * openFileDialog.getSelectedFile(); }
-		 */
-
-		// ui = new GUI();
-		// ui.show();
-
+		 * int filePath = openFileDialog.showDialog(null, "Open");
+		if (filePath==JFileChooser.APPROVE_OPTION){
+			file = openFileDialog.getSelectedFile();
+		}
+		*/
+		
+		//ui = new GUI();
+		//ui.show();
+		
 		try {
 			fis = new FileInputStream("relationships-small.txt");
 			Scanner in = new Scanner(fis);
@@ -102,7 +120,13 @@ public class LocalServer extends UnicastRemoteObject implements UserFunctions {
 							// System.out.println("SKOBA: " + splittedLine[0]);
 						} else {
 							// System.out.println("ID :" + splittedLine[0]);
+							count++;
+							if (count % 100000 == 0) {
+								System.out.println("Read " + count);
+							}
+							// if (count > 1000000) break;
 							mainId = splittedLine[0];
+							graph.incrementCount(Long.parseLong(mainId));
 							handleIdEntry(mainId);
 						}
 					} else {
@@ -110,7 +134,9 @@ public class LocalServer extends UnicastRemoteObject implements UserFunctions {
 						if (splittedLine.length == 2) {
 							// System.out.println(splittedLine[0] + " " +
 							// splittedLine[1]);
-							isInRelationshipWithHimself(mainId, splittedLine[1]);
+							isInRelationshipWithHimself(mainId,
+									splittedLine[1]);
+							graph.incrementSum(Long.parseLong(mainId));
 							// TODO: handle relationships
 							try {
 								addRelationship(mainId, splittedLine[0],
@@ -133,9 +159,14 @@ public class LocalServer extends UnicastRemoteObject implements UserFunctions {
 			}
 			in.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("ne 4ete ot faila -> v Runner");
+			System.out.println("Cannot find file.");
 			e.printStackTrace();
 		}
+		graph.partisionByFriends();
+
+		System.out.println("Time for reading "
+				+ String.valueOf(System.currentTimeMillis() - timer0));
+		
 	}
 
 	public void isInRelationshipWithHimself(String a, String b) {
@@ -157,16 +188,17 @@ public class LocalServer extends UnicastRemoteObject implements UserFunctions {
 	public void addRelationship(String mainId, String relationship, String relId)
 			throws NumberFormatException {
 		if (relationship.compareToIgnoreCase("dislikes") == 0) {
-			graph.addDislike(Long.parseLong(mainId), Long.parseLong(relId));
+			graph.addDisliked(Long.parseLong(relId));
+			//graph.addDislike(Long.parseLong(mainId), Long.parseLong(relId));
 		} else if (relationship.compareToIgnoreCase("friend_of") == 0) {
 			graph.addFriend(Long.parseLong(mainId), Long.parseLong(relId));
-		} else if (relationship.compareToIgnoreCase("knows") == 0) {
+		} /*else if (relationship.compareToIgnoreCase("knows") == 0) {
 			graph.addKnows(Long.parseLong(mainId), Long.parseLong(relId));
 		} else if (relationship.compareToIgnoreCase("married_to") == 0) {
 			graph.addMarried(Long.parseLong(mainId), Long.parseLong(relId));
 		} else if (relationship.compareToIgnoreCase("has_dated") == 0) {
 			graph.addDated(Long.parseLong(mainId), Long.parseLong(relId));
-		}
+		}*/
 	}
 
 }

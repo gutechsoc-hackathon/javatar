@@ -38,7 +38,7 @@ public class XMLGenerator {
 		long edgeId = 0;
 		for (Node node: fileMap.values())
 		{
-	
+			/*
 			for (long id: node.dislikes.getList())
 			{	
 				if(fileMap.containsKey(id)){
@@ -70,7 +70,7 @@ public class XMLGenerator {
 					edgeId++;
 				}
 			}
-			
+			*/
 			for (long id: node.friendOf.getList())
 			{
 				if(fileMap.containsKey(id)){
