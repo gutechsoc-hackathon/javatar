@@ -1,12 +1,12 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
+@SuppressWarnings("serial")
 public class RmiServer extends UnicastRemoteObject implements RmiServerIntf {
 	protected RmiServer() throws RemoteException {
 		super();
@@ -17,13 +17,13 @@ public class RmiServer extends UnicastRemoteObject implements RmiServerIntf {
 	public static long duplicate = 0;
 	public static GUI ui;
 
-	public static final String MESSAGE = "Hello world";
-
-	public String getMessage() {
-		return MESSAGE;
-	}
 	public long getNum(){
 		return graph.getSize();
+	}
+	
+	public void killServer(){
+		System.out.println("Server terminated");
+		System.exit(0);
 	}
 	
 	public void getAve(){
@@ -80,7 +80,7 @@ public class RmiServer extends UnicastRemoteObject implements RmiServerIntf {
 		// ui.show();
 
 		try {
-			fis = new FileInputStream("relationships-1g.txt");
+			fis = new FileInputStream("relationships-100m.txt");
 			Scanner in = new Scanner(fis);
 			// in = new BufferedReader(new
 			// FileReader("relationships-small.txt"));
