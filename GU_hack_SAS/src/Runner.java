@@ -90,7 +90,10 @@ public class Runner {
 			System.out.println("ne 4ete ot faila -> v Runner");
 			e.printStackTrace();
 		}
-		//graph.partisionByFriends();
+		graph.partisionByFriends();
+
+		System.out.println("The longest cycle is " + graph.awayFromStart + " people long");
+
 		//System.out.println("Check clustering: " + graph.clusterByFriends.size() );
 		//ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
 		System.out.println("Time for reading "
