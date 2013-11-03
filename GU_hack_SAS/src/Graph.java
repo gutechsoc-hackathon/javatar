@@ -5,7 +5,6 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-
 public class Graph {
 
 	private static TreeMap<Long, Node> fileMap;
@@ -44,13 +43,13 @@ public class Graph {
 	
 	public void averageRelationships(){
 		/*long odd_count = 0, even_count = 0, odd_sum = 0, even_sum = 0;
-		for (long id : fileMap.keySet()) {
-			if (id % 2 == 0) {
+		for (Node node : fileMap.values()) {
+			if (node.getId() % 2 == 0) {
 				even_count++;
-				even_sum += fileMap.get(id).numberOfRelationships();
+				even_sum += node.numberOfRelationships();
 			} else {
 				odd_count++;
-				odd_sum += fileMap.get(id).numberOfRelationships();
+				odd_sum += node.numberOfRelationships();
 			}
 		}*/
 		//Runner.ui.getEvenAve().setText(String.valueOf((1.0*even_sum) / even_count));
