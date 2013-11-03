@@ -9,8 +9,10 @@ public class Graph {
 
 	private static HashMap<Long, Node> fileMap;
 	public static Set<Set<Long>> clusterByFriends = new HashSet<Set<Long>>();
+	long odd_count, even_count, odd_sum, even_sum;
 	public Graph(){
 		 fileMap = new HashMap<Long,Node>(1<<10);
+		 odd_count = odd_sum = even_count = even_sum = 0;
 	}
 	
 	public long getSize(){
@@ -23,8 +25,24 @@ public class Graph {
 		}
 	}
 	
+	public void incrementCount(long id)
+	{
+		if (id % 2 == 0)
+			even_count++;
+		else
+			odd_count++;
+	}
+	
+	public void incrementSum(long id)
+	{
+		if (id % 2 == 0)
+			even_sum++;
+		else
+			odd_sum++;
+	}
+	
 	public void averageRelationships(){
-		long odd_count = 0, even_count = 0, odd_sum = 0, even_sum = 0;
+		/*long odd_count = 0, even_count = 0, odd_sum = 0, even_sum = 0;
 		for (long id : fileMap.keySet()) {
 			if (id % 2 == 0) {
 				even_count++;
@@ -33,7 +51,7 @@ public class Graph {
 				odd_count++;
 				odd_sum += fileMap.get(id).numberOfRelationships();
 			}
-		}
+		}*/
 		//Runner.ui.getEvenAve().setText(String.valueOf((1.0*even_sum) / even_count));
 		//Runner.ui.getOddAve().setText(String.valueOf((1.0*odd_sum) / odd_count));
 		System.out.println("Average num of relationships for odd: " + (1.0*odd_sum) / odd_count);
@@ -184,5 +202,37 @@ public class Graph {
 				isItRunning=false;
 			}
 		}
+	}
+
+	public long getOdd_count() {
+		return odd_count;
+	}
+
+	public void setOdd_count(long odd_count) {
+		this.odd_count = odd_count;
+	}
+
+	public long getEven_count() {
+		return even_count;
+	}
+
+	public void setEven_count(long even_count) {
+		this.even_count = even_count;
+	}
+
+	public long getOdd_sum() {
+		return odd_sum;
+	}
+
+	public void setOdd_sum(long odd_sum) {
+		this.odd_sum = odd_sum;
+	}
+
+	public long getEven_sum() {
+		return even_sum;
+	}
+
+	public void setEven_sum(long even_sum) {
+		this.even_sum = even_sum;
 	}
 }

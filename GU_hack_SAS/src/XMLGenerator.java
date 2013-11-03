@@ -36,9 +36,12 @@ public class XMLGenerator {
 		xmlEdges += "<edges>\n";
 		String currentEdge = "";
 		long edgeId = 0;
+		long count = 0;
 		for (Node node: fileMap.values())
 		{
-	
+			if (count % 10000 == 0)
+				System.out.println("Yeeeaahh "+ count);
+			count++;
 			for (long id: node.dislikes.getList())
 			{	
 				if(fileMap.containsKey(id)){
