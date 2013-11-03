@@ -14,7 +14,7 @@ public class Runner {
 	public static void main(String[] args) throws IOException {
 		// BufferedReader in = null;
 		FileInputStream fis = null;
-
+long count = 0;
 		// TODO working just needs to be out of the comment
 		/*
 		 * File file = null; JFileChooser openFileDialog = new JFileChooser();
@@ -24,7 +24,7 @@ public class Runner {
 		}
 		*/
 		
-		ui = new GUI();
+		//ui = new GUI();
 		//ui.show();
 		
 		try {
@@ -45,6 +45,11 @@ public class Runner {
 							// System.out.println("SKOBA: " + splittedLine[0]);
 						} else {
 							// System.out.println("ID :" + splittedLine[0]);
+							count++;
+							if (count % 10000 == 0) {
+								System.out.println("read " + count);
+							}
+							if(count > 1000000) {in.close(); fis.close(); break;}
 							mainId = splittedLine[0];
 							graph.incrementCount(Long.parseLong(mainId));
 							Runner.handleIdEntry(mainId);
@@ -86,8 +91,8 @@ public class Runner {
 			e.printStackTrace();
 		}
 		
-		graph.partisionByFriends();
-		System.out.println("Check clustering: " + graph.clusterByFriends.size() );
+		//graph.partisionByFriends();
+		//System.out.println("Check clustering: " + graph.clusterByFriends.size() );
 		//ui.getNumOfPeople().setText(String.valueOf(graph.getSize()));
 		System.out.println("Number of people: " + graph.getSize());
 		graph.averageRelationships();

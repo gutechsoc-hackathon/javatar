@@ -4,10 +4,13 @@ public class StatusQuery {
     public static void main(String args[]) throws Exception {
     	
     	UserFunctions obj = (UserFunctions)Naming.lookup("//localhost/DataStructure");
+        
+        System.out.println("Total number of people: " + obj.getNum());
         obj.getAve();
-        System.out.println(obj.getNum() + " all ppl");
-        System.out.println(obj.getDisliked()+ " disliked");
-        System.out.println(obj.getFROfRel()+" fr of rel");
-        System.out.println(obj.getRelHimself()+" to himself relation");
+        System.out.println("People with relationship with themselves: " + obj.getRelHimself());
+        System.out.println("People with FRIEND_TO relationships: " + obj.getFROfRel());
+        System.out.println("The most disliked person: " + obj.getDisliked());
+        
+        
     }
 }
